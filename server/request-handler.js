@@ -12,14 +12,13 @@ var twilioKeys = require('../twilio_api');
 // // Twilio Credentials Move somewhere else later
 var accountSid = twilioKeys.accountSid; 
 var authToken = twilioKeys.authToken;
+var phoneNumber = twilioKeys.phoneNumber;
 //require the Twilio module and create a REST client
 var client = require('twilio')(accountSid, authToken);
-
 
 exports.createSalt = function() {
   return crypto.randomBytes(20).toString('hex');
 };
-
 
 exports.checkBusinessData = function(req, res) {
   var category = req.body.category;
@@ -120,7 +119,7 @@ exports.textBusinesses = function(req, res) {
         console.log('business phone', biz.businessPhone);
         client.messages.create({
           to: biz.businessPhone,
-          from: '4152001619',
+          from: phoneNumber,
           body: 'Hey ' + biz.businessName +  '! ' + textInput
         }, function (err, message) {
           if (err) {
