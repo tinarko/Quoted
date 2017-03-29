@@ -222,3 +222,8 @@ exports.setVoiceMessage = function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 };
+
+exports.userAddcontacts = function(req, res) {
+  console.log('this is req.body inside userAddcontacts', JSON.stringify(req.body));
+  res.json({});
+};
