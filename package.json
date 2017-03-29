@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "server-dev": "node server/index.js",
-    "start": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "start": "node server/index.js"
   },
   "author": "Quoted Team",
   "license": "ISC",
