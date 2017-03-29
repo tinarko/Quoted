@@ -14,7 +14,6 @@ var loadExampleData = require('./loadExampleData').loadExampleData;
 var http = require('http');
 loadExampleData();
 
-
 // var setupTwilio = require('..twilio_api.js');
 
 var app = express();
