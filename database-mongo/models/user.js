@@ -7,14 +7,14 @@ var Promise = require('bluebird');
 var userSchema = mongoose.Schema({
   name: String,
   password: String,
-  requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Requests'}]
+  requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Requests'}],
   // name: String,
   // userCellPhone: String,
   // userEmail: String,
   // username: { type: String, unique: true },
   // password: String,
   // userEmail: String,
-  facebook: Object,
+  facebook: Object
   // userCellPhone: String,
   // salt: String,
   // userAddress: String,

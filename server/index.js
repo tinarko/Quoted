@@ -14,6 +14,9 @@ var loadExampleData = require('./loadExampleData').loadExampleData;
 var http = require('http');
 loadExampleData();
 
+
+// var setupTwilio = require('..twilio_api.js');
+
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -124,6 +127,7 @@ app.post('/businesses', handler.checkBusinessData);
 
 // SMS
 app.post('/messages', handler.textBusinesses);
+
 // app.post('/sms', handler.receiveText);
 app.post('/', handler.receiveText);
 
