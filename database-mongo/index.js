@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var mongoUrl = process.env.MONGOLAB_URI ||
 process.env.MONGODB_URI ||
-'mongodb://localhost/test';
+'mongodb://localhost/quoted';
 
 mongoose.connect(mongoUrl);
 

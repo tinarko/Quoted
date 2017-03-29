@@ -69,7 +69,6 @@ app.post('/login', function (req, res) {
     } else {
       console.log('wrong password')
       // res.redirect('/?#/login')
-      
     }
   })
  });
