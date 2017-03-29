@@ -11,6 +11,17 @@ var passport = require('passport');
 var path = require('path');
 var s3Router = require('./s3Router');
 var loadExampleData = require('./loadExampleData').loadExampleData;
+var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    var date = new Date().toISOString();
+    cb(null, file.fieldname + '-' + date + '.wav');
+  }
+});
+var upload = multer({ storage: storage });
 var http = require('http');
 loadExampleData();
 
@@ -98,6 +109,7 @@ app.get('/auth/facebook/callback',
 
 
 
+<<<<<<< HEAD
 //  User.create({
 //    name: name1,
 //    username: username,
@@ -117,6 +129,16 @@ app.get('/auth/facebook/callback',
 // app.post('/user/login', handler.userLogin);
 // app.get('/user/logout', handler.userLogout);
 
+=======
+ res.end();
+});
+
+
+app.post('/user/addcontacts', upload.single('recording'), handler.userAddcontacts);
+app.post('/user/signup', handler.userSignUp);
+app.post('/user/login', handler.userLogin);
+app.get('/user/logout', handler.userLogout);
+>>>>>>> add initial /user/addcontacts route with multer middleware
 app.post('/businesses', handler.checkBusinessData);
 
 // SMS
