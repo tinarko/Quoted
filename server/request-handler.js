@@ -9,6 +9,7 @@ var twilio = require('twilio');
 
 //Twillio Requirements
 var twilioKeys = require('../twilio_api');
+var twiml = new twilio.TwimlResponse();
 // // Twilio Credentials Move somewhere else later
 var accountSid = twilioKeys.accountSid; 
 var authToken = twilioKeys.authToken;
@@ -134,6 +135,13 @@ exports.textBusinesses = function(req, res) {
       });
     }
   }); // possibly limit here if we're still quering from db!
+};
+
+// webhook for SMS response
+exports.receiveText = function(req, res) {
+  twiml.message('The Robots are coming! Head for the hills!');
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
 };
 
 
