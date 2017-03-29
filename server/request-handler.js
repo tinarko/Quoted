@@ -1,21 +1,23 @@
-//Yelp
 var db = require('../database-mongo/index.js');
 var Business = require('../database-mongo/models/business.js');
 var Users = require('../database-mongo/models/user.js');
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
-var yelp = require('./yelp/yelp-query.js');
-var twilio = require('twilio');
 
-//Twillio Requirements
+//Yelp
+var yelp = require('./yelp/yelp-query.js');
+
+//require the Twilio module and create a REST client
+var twilio = require('twilio');
+var client = require('twilio')(accountSid, authToken);
+
+//Twillio credentials
 var twilioKeys = require('../twilio_api');
 var twiml = new twilio.TwimlResponse();
-// // Twilio Credentials Move somewhere else later
 var accountSid = twilioKeys.accountSid; 
 var authToken = twilioKeys.authToken;
 var phoneNumber = twilioKeys.phoneNumber;
-//require the Twilio module and create a REST client
-var client = require('twilio')(accountSid, authToken);
+
 
 exports.createSalt = function() {
   return crypto.randomBytes(20).toString('hex');
@@ -143,7 +145,11 @@ documentation: https://www.twilio.com/docs/quickstart/node/programmable-sms#rece
 overall: You need to run ngrok and expose your port to the public
 1. download ngrok and place the exe in: /usr/local/bin
 2. in terminal, run: ngrok http 3000
+<<<<<<< HEAD
 3. take the forwarding url and add to your twilio message webhook. NOTE: THIS CHANGES EVERYTIME YOU RESTART NGROK
+=======
+3. take the forwarding url and add to your twilio message webhook
+>>>>>>> Start installing ngrok in order to listen to inbound text messages
 4. to inspect ngrok, view your ngrok console and/or http://localhost:4040
 
 */
