@@ -1,6 +1,6 @@
 //Yelp
 var db = require('../database-mongo/index.js');
-var Business = require('../database-mongo/models/business.js');
+var Contacts = require('../database-mongo/models/contacts.js');
 var Users = require('../database-mongo/models/user.js');
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
@@ -31,7 +31,7 @@ exports.checkBusinessData = function(req, res) {
 	// var geolocationLat = req.body.geolocationLat;
 	// var geolocationLong = req.body.geolocationLong;	
 
-  Business.find({"businessType": category, "businessCity": location})
+  Contacts.find({"businessType": category, "businessCity": location})
 		.exec(function(err, result) {
 			if (err) {
           res.status(500).send("Something unexpected and horrendeous happened"); 	
@@ -112,7 +112,7 @@ exports.textBusinesses = function(req, res) {
   var businessType = req.body.businessCategory;
   var location = req.body.location;
 
-  Business.find({businessType: businessType, businessCity: location}, function(err, businesses){
+  Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
@@ -170,17 +170,17 @@ exports.callBusinesses = function(req, res) {
   console.log('location', location);
 
 
-  Business.find({businessType: businessType, businessCity: location}, function(err, businesses){
+  Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
-      console.log('test businesses', businesses);
-      businesses.forEach(function(biz) {
+      console.log('test businesses', contacts);
+      contacts.forEach(function(contact) {
         client.calls.create({
           // FOR THE URL in the server in terminal write "./ngrok http 3000". Then paste the URL below followed by /voice
           url: 'https://0ab38556.ngrok.io/voice', // CHANGE THIS!!!!
           // url: 'http://demo.twilio.com/docs/voice.xml', // The twilio test
-          to: biz.businessPhone,
+          to: contact.businessPhone,
           from: '4152001619',
         }, function (err, call) {
           if (err) {

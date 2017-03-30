@@ -4,9 +4,9 @@ var mongoose = require('mongoose');
 // Requests schema
 
 var requestsSchema = new Schema({
-  request: String,
+  outboundMsg: String,
   groupName: String,
-  groupResponses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Responses'}]
+  contacts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contacts'}]
 });
 
 var Requests = mongoose.model('Requests', requestsSchema);
