@@ -13,3 +13,6 @@ package copy.json
 
 #uploads is a folder containing files uploaded through FileUpload component
 uploads
+
+#OSX specific
+.DS_Store
