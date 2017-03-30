@@ -13,12 +13,22 @@ var s3Router = require('./s3Router');
 var loadExampleData = require('./loadExampleData').loadExampleData;
 var multer = require('multer');
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
+  destination: './uploads/',
   filename: function (req, file, cb) {
-    var date = new Date().toISOString();
-    cb(null, file.fieldname + '-' + date + '.wav');
+    // Mimetype stores the file type, set extensions according to filetype
+    switch (file.mimetype) {
+    case 'image/jpeg':
+      ext = '.jpeg';
+      break;
+    case 'image/png':
+      ext = '.png';
+      break;
+    case 'image/gif':
+      ext = '.gif';
+      break;
+    }
+
+    cb(null, file.originalname.slice(0, 4) + Date.now() + ext);
   }
 });
 var upload = multer({ storage: storage });
@@ -134,7 +144,7 @@ app.get('/auth/facebook/callback',
 });
 
 
-app.post('/user/addcontacts', upload.single('recording'), handler.userAddcontacts);
+app.post('/user/addcontacts', upload.single('file'), handler.userAddcontacts);
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
 app.get('/user/logout', handler.userLogout);
