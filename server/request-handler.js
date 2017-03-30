@@ -138,7 +138,6 @@ exports.textBusinesses = function(req, res) {
     }
   }); // possibly limit here if we're still quering from db!
 };
-
 /* NGROK
 documentation: https://www.twilio.com/docs/quickstart/node/programmable-sms#receive-inbound-sms-messages
 
