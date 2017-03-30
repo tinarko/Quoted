@@ -10,11 +10,6 @@ var User = require('../database-mongo/models/user.js');
 var http = require('http');
 loadExampleData();
 
-<<<<<<< HEAD
-=======
-// var setupTwilio = require('..twilio_api.js');
-
->>>>>>> Start installing ngrok in order to listen to inbound text messages
 var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
