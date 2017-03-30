@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
-
 app.use(session({
   secret: 'Greenfie1dBr0s',
   resave: true,
@@ -31,9 +30,8 @@ app.use(session({
 
 app.use(cookieParser('Greenfie1dBr0s'));
 
- app.use(passport.initialize());
- app.use(session());
-
+app.use(passport.initialize());
+app.use(session());
 
 // facebook passport
 app.get('/auth/facebook',
