@@ -148,6 +148,7 @@ app.post('/', handler.receiveText);
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
+app.get('/contactList', handler.retrieveContacts);
 
 //Deployment ports
 app.set('port', (3000));
