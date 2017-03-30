@@ -224,6 +224,9 @@ exports.setVoiceMessage = function(req, res) {
 };
 
 exports.userAddcontacts = function(req, res) {
-  console.log('this is req.body inside userAddcontacts', JSON.stringify(req.body));
-  res.json({});
+  if (req.file && req.file.originalname) {
+    console.log(`Received file ${req.file.originalname}`);
+  }
+
+  res.send({ responseText: req.file.path }); // You can send any response to the user here
 };
