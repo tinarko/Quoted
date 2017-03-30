@@ -10,11 +10,11 @@ class FileUpload extends React.Component {
     // please consult http://www.dropzonejs.com/#configuration
     this.djsConfig = {
       addRemoveLinks: true,
-      acceptedFiles: 'image/jpeg,image/png,image/gif,text/csv'
+      acceptedFiles: 'text/csv,application/vnd.ms-excel'
     };
 
     this.componentConfig = {
-      iconFiletypes: ['.jpg', '.png', '.gif'],
+      iconFiletypes: ['.csv'],
       showFiletypeIcon: true,
       postUrl: '/user/addcontacts'
     };
