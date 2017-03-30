@@ -60,7 +60,7 @@ class Inputs extends React.Component {
           </tbody>
           <Message handleTextInputChange={this.props.handleTextInputChange}/>         
           <SoundIcon recordingPublicUrl={this.props.recordingPublicUrl} />        
-          <button onClick={this.props.sendInfo} className="btn btn-primary"> Send for Help! </button>
+          <button onClick={this.props.sendInfo} className="btn btn-primary"> Contact your group </button>
           </div>
       </div>
     )
