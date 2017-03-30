@@ -5,7 +5,7 @@ var n = require('nonce')();
 var request = require('request');
 var qs = require('querystring');
 var Yelp = require('yelp');
-var Business = require('../../database-mongo/models/business.js')
+var Contacts = require('../../database-mongo/models/contacts.js')
 var Promise = require('bluebird');
 
 var yelp = new Yelp({
@@ -19,19 +19,19 @@ yelp.queryApi = function(obj) {
   return new Promise((resolve, reject) => {
     yelp.search(obj)
     .then(function (data) {
-      var businesses = data.businesses;
-      businesses.forEach((business) => {
-        if (business.location.address.length === 0) {
-          business.location.address = 'Serving ' + business.location.city;
+      var contacts = data.businesses;
+      contacts.forEach((contact) => {
+        if (contact.location.address.length === 0) {
+          contact.location.address = 'Serving ' + contact.location.city;
         }
-        Business.create({
-          businessName: business.name,
-          businessPhone: business.phone,
-          businessAddress: business.location.address,
-          businessCity: business.location.city,
-          businessPictureUrl: business.image_url,
+        Contacts.create({
+          businessName: contact.name,
+          businessPhone: contact.phone,
+          businessAddress: contact.location.address,
+          businessCity: contact.location.city,
+          businessPictureUrl: contact.image_url,
           businessType: obj.term,
-          businessRatingUrl: business.rating_img_url
+          businessRatingUrl: contact.rating_img_url
        }).then(function(result) {
           // console.log('stored following entry into Business Schema: ', result);     
         });       
