@@ -120,9 +120,6 @@ app.get('/auth/facebook/callback',
 //  var email = req.body.userEmail;
 //  var password = req.body.password;
 
-
-
-<<<<<<< HEAD
 //  User.create({
 //    name: name1,
 //    username: username,
@@ -137,21 +134,11 @@ app.get('/auth/facebook/callback',
 //  res.end()
 // });
 
-
 // app.post('/user/signup', handler.userSignUp);
 // app.post('/user/login', handler.userLogin);
 // app.get('/user/logout', handler.userLogout);
 
-=======
- res.end();
-});
-
-
 app.post('/user/addcontacts', upload.single('file'), handler.userAddcontacts);
-app.post('/user/signup', handler.userSignUp);
-app.post('/user/login', handler.userLogin);
-app.get('/user/logout', handler.userLogout);
->>>>>>> add initial /user/addcontacts route with multer middleware
 app.post('/businesses', handler.checkBusinessData);
 
 // SMS
