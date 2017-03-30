@@ -23,6 +23,7 @@ var client = require('twilio')(accountSid, authToken);
 // };
 
 exports.checkBusinessData = function(req, res) {
+  // console.log('REQ USER IS', req.user);
   var category = req.body.category;
   var location = req.body.location;
 	
@@ -39,7 +40,7 @@ exports.checkBusinessData = function(req, res) {
         if(result.length <= 2) {
           yelp.queryApi({ 'term': category, 'location': location })
 					.then((results) => {
-            console.log('yelp query results: ', results);
+            // console.log('yelp query results: ', results);
 						res.json(results.businesses);
 					});
         } else {            
@@ -99,10 +100,10 @@ exports.checkBusinessData = function(req, res) {
 // };
 
 exports.textBusinesses = function(req, res) {
-  console.log('getting response from client'); 
-  console.log('req body', req.body);
+  // console.log('getting response from client'); 
+  // console.log('req body', req.body);
   var textInput = req.body.textInput
-  console.log('textInput', textInput);
+  // console.log('textInput', textInput);
   // if we are just getting an array from the client then we don't need to do the Business.find
   // we'd just start on the forEach loop
   // var businessType = "test" // req.body.businesstype
@@ -116,9 +117,9 @@ exports.textBusinesses = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log('test businesses', businesses);
+      // console.log('test businesses', businesses);
       businesses.forEach(function(biz) {
-        console.log('business phone', biz.businessPhone);
+        // console.log('business phone', biz.businessPhone);
         client.messages.create({
           to: biz.businessPhone,
           from: phoneNumber,
@@ -128,8 +129,8 @@ exports.textBusinesses = function(req, res) {
             console.log('err', err);
             res.status(404).end();
           } else {
-            console.log('sent message!!!!!');
-            console.log('message sid', message.sid);
+            // console.log('sent message!!!!!');
+            // console.log('message sid', message.sid);
             res.status(200).send();
           }
         });
@@ -151,7 +152,7 @@ overall: You need to run ngrok and expose your port to the public
 
 // webhook for SMS response
 exports.receiveText = function(req, res) {
-  console.log('SERVER IS RECEIVING!!!!');
+  // console.log('SERVER IS RECEIVING!!!!');
   var twilio = require('twilio');
   twiml.message('The Robots are coming! Head for the hills!');
   res.writeHead(200, {'Content-Type': 'text/xml'});
@@ -160,21 +161,21 @@ exports.receiveText = function(req, res) {
 
 
 exports.callBusinesses = function(req, res) {
-  console.log('trying to call');
+  // console.log('trying to call');
 
 
   var businessType = req.body.businessCategory;
   var location = req.body.location;
-  console.log('request body', req.body);
-  console.log('businessType', businessType);
-  console.log('location', location);
+  // console.log('request body', req.body);
+  // console.log('businessType', businessType);
+  // console.log('location', location);
 
 
   Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
-      console.log('test businesses', contacts);
+      // console.log('test businesses', contacts);
       contacts.forEach(function(contact) {
         client.calls.create({
           // FOR THE URL in the server in terminal write "./ngrok http 3000". Then paste the URL below followed by /voice
@@ -196,7 +197,7 @@ exports.callBusinesses = function(req, res) {
 };
 
 exports.setVoiceMessage = function(req, res) {
-  console.log('in set vm', req.body);
+  // console.log('in set vm', req.body);
   // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/65005.mp3'; // req.body to get
 
   // var voiceRecording = 'http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02.wav'; // WAV classical music in case we get too many errors

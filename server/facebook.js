@@ -14,9 +14,9 @@ passport.use(new FacebookStrategy({
     callbackURL: configAuth.facebookAuth.callbackURL
   },
    function(accessToken, refreshToken, profile, done) {
-      console.log('profile: ', profile);
-      console.log('accessToken', accessToken);
-      console.log('refreshToken', refreshToken);
+      // console.log('profile: ', profile);
+      // console.log('accessToken', accessToken);
+      // console.log('refreshToken', refreshToken);
        //check user table for anyone with a facebook ID of profile.id
        User.findOne({
            'facebook.id': profile.id
@@ -38,7 +38,7 @@ passport.use(new FacebookStrategy({
                    return done(err, user);
                });
            } else {
-            console.log('hello user', user);
+            // console.log('hello user', user);
                //found user. Return
                return done(err, user);
            }
@@ -47,14 +47,14 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.serializeUser(function(user, done) {
-  console.log('serialize user: ', user);
+  // console.log('serialize user: ', user);
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log('deserialize id: ', id);
+  // console.log('deserialize id: ', id);
   User.findById(id, function(err, user) {
-    console.log('deserialize user: ', user);
+    // console.log('deserialize user: ', user);
     done(err, user);
   });
 });
