@@ -25,7 +25,6 @@ businessSchema.pre('save', function(next) {
 
 var Business = mongoose.model('Business', businessSchema);
 
-//CLASS DATA
 var addBiz = function(businessName, businessPhone, businessType) {
   if (arguments.length <= 2) {
     businessType = 'HRSF72';
@@ -41,13 +40,50 @@ var addBiz = function(businessName, businessPhone, businessType) {
   }, function(err, data) {
     console.log('newsaved');
   });
-}
+};
 
 // Team forkly
 addBiz('Tina Ko', 4085687438);
 addBiz('Kyle Brad', 8016022123);
 addBiz('Al Pawlicki', 5628959734);
 addBiz('John Duong', 4085317972);
+
+
+module.exports = Business;
+// contact responses schema
+// module.exports.Business = Business;
+
+// var contactResponsesSchema = new Schema({
+//   contactName: String,
+//   contactNumber: Number,
+//   contactResponse: Array
+// });
+
+// var addContact = function(name, number) {
+//   Business.create({
+//     contactName: name,
+//     contactNumber: number
+//   }, function(err, data) {
+//     if (err) {
+//       throw err;
+//     } else {
+//       console.log(data);
+//     }
+//   })
+// };
+
+// addContact('Tina Ko', 4085687438);
+// addContact('John Duong', 4085317972);
+
+// var contactResponses = mongoose.model('contactResponses', contactResponsesSchema);
+
+// module.exports.contactResponses = contactResponses;
+
+
+
+
+
+//CLASS DATA
 
 // Test Data
 // addBiz('Edwin', 7703357571, 'test');
@@ -75,5 +111,3 @@ addBiz('John Duong', 4085317972);
 // addBiz("Gary Wong", 4156974834);
 // addBiz("Tayo Jolaosho", 9177553154);
 // addBiz("Eugene", 9177503172);
-
-module.exports = Business;

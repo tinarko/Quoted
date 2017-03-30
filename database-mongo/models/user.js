@@ -5,15 +5,16 @@ var Promise = require('bluebird');
 
 //User Table Schema
 var userSchema = mongoose.Schema({
-  name: String,
   username: { type: String, unique: true },
   password: String,
-  userEmail: String,
-  userCellPhone: String,
-  salt: String,
-  userAddress: String,
-  userCity: String,
-  userZip: Number
+  requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Requests'}]
+  // name: String,
+  // userCellPhone: String,
+  // userEmail: String,
+  // salt: String,
+  // userAddress: String,
+  // userCity: String,
+  // userZip: Number
 });
 
 //Middleware to hash password
