@@ -222,3 +222,11 @@ exports.setVoiceMessage = function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 };
+
+exports.userAddcontacts = function(req, res) {
+  if (req.file && req.file.originalname) {
+    console.log(`Received file ${req.file.originalname}`);
+  }
+
+  res.send({ responseText: req.file.path }); // You can send any response to the user here
+};

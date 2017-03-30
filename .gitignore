@@ -1,7 +1,18 @@
+#npm packages and webpack bundled files
 node_modules
 react-client/dist/bundle.js
 react-client/dist/bundle.js.map
+
+#api keys
 twilio_api.js
 yelp_api.js
 server/auth.js
+
+#extra backup of package.json
 package copy.json
+
+#uploads is a folder containing files uploaded through FileUpload component
+uploads
+
+#OSX specific
+.DS_Store

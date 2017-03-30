@@ -11,6 +11,30 @@ var passport = require('passport');
 var path = require('path');
 var s3Router = require('./s3Router');
 var loadExampleData = require('./loadExampleData').loadExampleData;
+var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: './uploads/',
+  filename: function (req, file, cb) {
+    // Mimetype stores the file type, set extensions according to filetype
+    switch (file.mimetype) {
+    case 'image/jpeg':
+      ext = '.jpeg';
+      break;
+    case 'image/png':
+      ext = '.png';
+      break;
+    case 'image/gif':
+      ext = '.gif';
+      break;
+    case 'text/csv':
+      ext = '.csv';
+      break;
+    }
+
+    cb(null, file.originalname.slice(0, 4) + Date.now() + ext);
+  }
+});
+var upload = multer({ storage: storage });
 var http = require('http');
 loadExampleData();
 
@@ -96,8 +120,6 @@ app.get('/auth/facebook/callback',
 //  var email = req.body.userEmail;
 //  var password = req.body.password;
 
-
-
 //  User.create({
 //    name: name1,
 //    username: username,
@@ -112,11 +134,11 @@ app.get('/auth/facebook/callback',
 //  res.end()
 // });
 
-
 // app.post('/user/signup', handler.userSignUp);
 // app.post('/user/login', handler.userLogin);
 // app.get('/user/logout', handler.userLogout);
 
+app.post('/user/addcontacts', upload.single('file'), handler.userAddcontacts);
 app.post('/businesses', handler.checkBusinessData);
 
 // SMS
