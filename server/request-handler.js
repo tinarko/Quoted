@@ -216,7 +216,8 @@ exports.setVoiceMessage = function(req, res) {
     userCellPhone: 7703357571
   }
 
-  var quotedMessage = 'This message was sent through Quoted. Please call back ' + user.name + ' at ' + user.userCellPhone + ' that again is ' + user.userCellPhone;
+  var twiml = new twilio.TwimlResponse();
+  var quotedMessage = 'This message was sent through Quoted. Please call back ' + user.name + ' at ' + user.userCellPhone;
   // var quotedMessage = 'This message was sent through Quoted. Please call back the number provided within the message';
   twiml.play(voiceRecording);
   twiml.say(quotedMessage, 
