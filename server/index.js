@@ -26,6 +26,9 @@ var storage = multer.diskStorage({
     case 'image/gif':
       ext = '.gif';
       break;
+    case 'text/csv':
+      ext = '.csv';
+      break;
     }
 
     cb(null, file.originalname.slice(0, 4) + Date.now() + ext);
