@@ -17,12 +17,6 @@ var twiml = new twilio.TwimlResponse();
 var accountSid = twilioKeys.accountSid; 
 var authToken = twilioKeys.authToken;
 var phoneNumber = twilioKeys.phoneNumber;
-<<<<<<< HEAD
-=======
-
->>>>>>> Start installing ngrok in order to listen to inbound text messages
-
-
 
 // exports.createSalt = function() {
 //   return crypto.randomBytes(20).toString('hex');
