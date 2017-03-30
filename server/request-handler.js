@@ -139,21 +139,21 @@ exports.textBusinesses = function(req, res) {
     }
   }); // possibly limit here if we're still quering from db!
 };
-
-
 /* NGROK
 documentation: https://www.twilio.com/docs/quickstart/node/programmable-sms#receive-inbound-sms-messages
 
 overall: You need to run ngrok and expose your port to the public
 1. download ngrok and place the exe in: /usr/local/bin
 2. in terminal, run: ngrok http 3000
-3. take the forwarding url and add to your twilio message webhook
+3. take the forwarding url and add to your twilio message webhook. NOTE: THIS CHANGES EVERYTIME YOU RESTART NGROK
 4. to inspect ngrok, view your ngrok console and/or http://localhost:4040
 
 */
 
 // webhook for SMS response
 exports.receiveText = function(req, res) {
+  console.log('SERVER IS RECEIVING!!!!');
+  var twilio = require('twilio');
   twiml.message('The Robots are coming! Head for the hills!');
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
@@ -213,7 +213,7 @@ exports.setVoiceMessage = function(req, res) {
   }
 
   var twiml = new twilio.TwimlResponse();
-  var quotedMessage = 'This message was sent through Quoted. Please call back ' + user.name + ' at ' + user.userCellPhone + ' that again is ' + user.userCellPhone;
+  var quotedMessage = 'This message was sent through Quoted. Please call back ' + user.name + ' at ' + user.userCellPhone;
   // var quotedMessage = 'This message was sent through Quoted. Please call back the number provided within the message';
   twiml.play(voiceRecording);
   twiml.say(quotedMessage, 

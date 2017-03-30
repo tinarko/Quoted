@@ -85,7 +85,6 @@ app.post('/signup', function (req, res) {
  var email = req.body.userEmail;
  var password = req.body.password;
 
-
  User.create({
    name: name1,
    username: username,
@@ -99,8 +98,6 @@ app.post('/signup', function (req, res) {
  res.end()
 });
 
-
-
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
 app.get('/user/logout', handler.userLogout);
@@ -108,7 +105,8 @@ app.post('/businesses', handler.checkBusinessData);
 
 // SMS
 app.post('/messages', handler.textBusinesses);
-app.post('/sms', handler.receiveText);
+// app.post('/sms', handler.receiveText);
+app.post('/', handler.receiveText);
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
