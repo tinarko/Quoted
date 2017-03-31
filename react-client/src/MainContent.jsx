@@ -82,26 +82,22 @@ class MainContent extends React.Component {
 
   // need to change this to fetch user contacts instead of querying yelp businesses
   fetchBusinesses(event) {
-    // let params = {};
-    // params.category = this.state.businessCategory || 'test';
-    // params.location = this.state.location || 'San Francisco';
-    // console.log('fetchBusiness params: ', params);
+    let params = {};
+    params.category = this.state.businessCategory || 'test';
+    params.location = this.state.location || 'San Francisco';
+    console.log('fetchBusiness params: ', params);
 
-    // $.post({
-    //   url: '/businesses',
-    //   data: params,
-    //   dataType: 'json',
-    //   success: (results) => {
-    //     console.log('success results: ', results);
-    //     this.setState({businesses: results});
-    //   }, 
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // })
-
-    $.get({
-      url: '/contactList'
+    $.post({
+      url: '/businesses',
+      data: params,
+      dataType: 'json',
+      success: (results) => {
+        console.log('success results: ', results);
+        this.setState({businesses: results});
+      }, 
+      error: (err) => {
+        console.log('err', err);
+      }
     })
 
     // $.get({
