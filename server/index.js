@@ -51,7 +51,7 @@ app.use(express.session({secret: 'Greenfie1dBr0s'}));
 app.use(express.cookieParser());
 
  app.use(passport.initialize());
- app.use(express.session());
+ app.use(passport.session());
 
 
 // facebook passport
