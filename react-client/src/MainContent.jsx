@@ -6,6 +6,7 @@ import Message from './components/Message.jsx'
 import SoundIcon from './components/SoundIcon.jsx'
 import Inputs from './components/Inputs.jsx'
 import List from './components/List.jsx'
+import {HashRouter, Route, IndexRoute, Link} from 'react-router-dom';
 
 class MainContent extends React.Component {
   constructor(props) {

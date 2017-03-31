@@ -7,8 +7,7 @@ import MainContent from './MainContent.jsx'
 import Login from './components/Login.jsx'
 import Threads from './components/Threads.jsx'
 // import {Router, Route, browserHistory, IndexRoute, HashRouter} from 'react-router';
-import {BrowserRouter, Route,IndexRoute, Link} from 'react-router-dom'
-// import {HashRouter, Route, IndexRoute, Link} from 'react-router-dom'
+import {HashRouter, Route, IndexRoute, Link} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,14 +25,14 @@ class App extends React.Component {
   }
   render () {
     return (
-      <BrowserRouter>
+      <HashRouter>
           <div>
               <Route exact path="/" component={MainContent} />
               <Route path="/ThreadView" component={(props, state) => <Threads threads={this.state.threads} />}/>
               <Route path="/SignUp" component={SignUp} />
               <Route path="/Login" component={Login} />
           </div>
-      </ BrowserRouter>
+      </ HashRouter>
     ) 
   }
 }
