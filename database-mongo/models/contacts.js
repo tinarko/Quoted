@@ -48,7 +48,8 @@ addContact('Kyle Brad', 8016022123);
 addContact('Al Pawlicki', 5628959734);
 addContact('John Duong', 4085317972);
 
-module.exports = Contacts;
+module.exports.Contacts = Contacts;
+module.exports.addContact = addContact;
 
 // contact responses schema
 // module.exports.Business = Business;
