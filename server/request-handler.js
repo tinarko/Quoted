@@ -1,16 +1,20 @@
-//Yelp
-var db = require('../database-mongo/index.js');
-var Contacts = require('../database-mongo/models/contacts.js');
-var Users = require('../database-mongo/models/user.js');
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
+
+
+//database
+var db = require('../database-mongo/index.js');
+var contactsdb = require('../database-mongo/models/contacts.js');
+var Users = require('../database-mongo/models/user.js');
+var responsesdb = require('../database-mongo/models/responses.js');
+
+//Yelp
 var yelp = require('./yelp/yelp-query.js');
-var twilio = require('twilio');
 
 //Twillio Requirements
+var twilio = require('twilio');
 var twilioKeys = require('../twilio_api');
 var twiml = new twilio.TwimlResponse();
-// // Twilio Credentials Move somewhere else later
 var accountSid = twilioKeys.accountSid; 
 var authToken = twilioKeys.authToken;
 var phoneNumber = twilioKeys.phoneNumber;
@@ -32,7 +36,7 @@ exports.checkBusinessData = function(req, res) {
 	// var geolocationLat = req.body.geolocationLat;
 	// var geolocationLong = req.body.geolocationLong;	
 
-  Contacts.find({"businessType": category, "businessCity": location})
+  contactsdb.Contacts.find({"businessType": category, "businessCity": location})
 		.exec(function(err, result) {
 			if (err) {
           res.status(500).send("Something unexpected and horrendeous happened"); 	
@@ -113,7 +117,7 @@ exports.textBusinesses = function(req, res) {
   var businessType = req.body.businessCategory;
   var location = req.body.location;
 
-  Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
+  contactsdb.Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
@@ -152,17 +156,20 @@ overall: You need to run ngrok and expose your port to the public
 
 // webhook for SMS response
 exports.receiveText = function(req, res) {
-  // console.log('SERVER IS RECEIVING!!!!');
-  var twilio = require('twilio');
-  twiml.message('The Robots are coming! Head for the hills!');
+  var inboundMsg = req.body.Body;
+  var fromNumber = req.body.From;
+  // to take out the leading '+1' for US. for example, +14085603553 will now be saved as 4085603553
+  fromNumber = Number(req.body.From.slice(2)); 
+
+  // var twilio = require('twilio');
+  responsesdb.createResponse(fromNumber, inboundMsg);
+  twiml.message('From Forkly: Thanks for your text!');
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 };
 
 
 exports.callBusinesses = function(req, res) {
-  // console.log('trying to call');
-
 
   var businessType = req.body.businessCategory;
   var location = req.body.location;
@@ -171,7 +178,7 @@ exports.callBusinesses = function(req, res) {
   // console.log('location', location);
 
 
-  Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
+  contactsdb.Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {

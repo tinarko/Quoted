@@ -25,7 +25,7 @@ contactsSchema.pre('save', function(next) {
 
 var Contacts = mongoose.model('Contacts', contactsSchema);
 
-var addBiz = function(businessName, businessPhone, businessType) {
+var addContact = function(businessName, businessPhone, businessType) {
   if (arguments.length <= 2) {
     businessType = 'HRSF72';
   }
@@ -38,18 +38,18 @@ var addBiz = function(businessName, businessPhone, businessType) {
     businessPictureUrl: 'https://raw.githubusercontent.com/Thinkful/bootcamp-finder/master/bootcamps/hack-reactor/logo.png',
     businessRatingUrl: 'https://s3-media1.fl.yelpcdn.com/assets/2/www/img/f1def11e4e79/ico/stars/v1/stars_5.png'
   }, function(err, data) {
-    console.log('newsaved');
+    console.log('Contact created');
   });
 };
 
 // Team forkly
-addBiz('Tina Ko', 4085687438);
-addBiz('Kyle Brad', 8016022123);
-addBiz('Al Pawlicki', 5628959734);
-addBiz('John Duong', 4085317972);
+addContact('Tina Ko', 4085687438);
+addContact('Kyle Brad', 8016022123);
+addContact('Al Pawlicki', 5628959734);
+addContact('John Duong', 4085317972);
 
-
-module.exports = Contacts;
+module.exports.Contacts = Contacts;
+module.exports.addContact = addContact;
 
 // contact responses schema
 // module.exports.Business = Business;
@@ -72,17 +72,6 @@ module.exports = Contacts;
 //     }
 //   })
 // };
-
-// addContact('Tina Ko', 4085687438);
-// addContact('John Duong', 4085317972);
-
-// var contactResponses = mongoose.model('contactResponses', contactResponsesSchema);
-
-// module.exports.contactResponses = contactResponses;
-
-
-
-
 
 //CLASS DATA
 

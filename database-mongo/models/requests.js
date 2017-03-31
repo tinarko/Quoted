@@ -11,4 +11,4 @@ var requestsSchema = new Schema({
 
 var Requests = mongoose.model('Requests', requestsSchema);
 
-module.exports.Requests = Requests;
+module.exports = Requests;
