@@ -1,10 +1,18 @@
 import ReactDOM from 'react-dom';
-import React from 'react';
+// import React from 'react';
 import ListItem from './ListItem.jsx';
-import $ from 'jquery'
+import $ from 'jquery';
+import React, { Component, PropTypes } from 'react';
+
 class Nav extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClickPastThreads = this.handleClickPastThreads.bind(this);
+  }
+
+  handleClickPastThreads (event) {
+  	event.preventDefault();
+  	this.context.router.history.push('/ThreadView');
   }
 
   render() {
@@ -43,5 +51,9 @@ class Nav extends React.Component {
     )
   }
 }
+
+Nav.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default Nav; 
