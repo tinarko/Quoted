@@ -170,7 +170,6 @@ exports.receiveText = function(req, res) {
 
 
 exports.callBusinesses = function(req, res) {
-  // console.log('trying to call');
 
   var businessType = req.body.businessCategory;
   var location = req.body.location;
