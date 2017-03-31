@@ -5,7 +5,7 @@ var app = require('../server/index.js');
 
 var db = require('../database-mongo/index.js');
 var User = require('../database-mongo/models/user');
-var Contacts = require('../database-mongo/models/contacts');
+var contactsdb = require('../database-mongo/models/contacts');
 
 /////////////////////////////////////////////////////
 // NOTE: these tests are designed for mongo!
