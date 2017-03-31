@@ -69,8 +69,6 @@ app.get('/findText/:number', handler.findResponsesFromContactNumber);
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
 
-// app.get('/contactList', handler.retrieveContacts);
-
 let port = process.env.PORT || 3000;
 
 //Deployment ports
