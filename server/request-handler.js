@@ -15,11 +15,14 @@ var yelp = require('./yelp/yelp-query.js');
 var twilio = require('twilio');
 var twilioKeys = require('../twilio_api');
 var twiml = new twilio.TwimlResponse();
-var accountSid = twilioKeys.accountSid; 
-var authToken = twilioKeys.authToken;
-var phoneNumber = twilioKeys.phoneNumber;
+
+// // Twilio Credentials Move somewhere else later
+// var accountSid = twilioKeys.accountSid; 
+// var authToken = twilioKeys.authToken;
+// var phoneNumber = twilioKeys.phoneNumber;
+
 //require the Twilio module and create a REST client
-var client = require('twilio')(accountSid, authToken);
+var client = require('twilio')(process.env.TWIL_accountSid, process.env.TWIL_authToken);
 
 exports.checkBusinessData = function(req, res) {
   // console.log('REQ USER IS', req.user);
