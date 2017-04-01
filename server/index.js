@@ -68,7 +68,6 @@ app.post('/', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if the
 app.post('/createNewThread/:groupName', handler.createNewThread);
 // app.post('/sms', handler.receiveText); 
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
-// app.post('/createNewThread', handler.createNewThread);
 
 
 
