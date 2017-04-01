@@ -69,6 +69,7 @@ app.get('/findText/:number', handler.findResponsesFromContactNumber);
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
+// app.get('/contactList', handler.retrieveContacts);
 
 // get request handler for threads
 app.get('/threads', (req, res) => {
