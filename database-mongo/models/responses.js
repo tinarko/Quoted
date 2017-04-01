@@ -27,6 +27,20 @@ var createResponse = function(fromNumber, inboundMsg, callback) {
   });
 }
 
+var createNewThread = function(callback) {
+  console.log('Creating new thread')
+  Threads.create({
+
+  }, function(err, data) {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log('data', data);
+      callback(null, data);
+    }
+  });
+}
+
 var findResponsesFromContactNumber = function(fromNumber, callback) {
   Responses.find({
   	fromNumber: fromNumber
