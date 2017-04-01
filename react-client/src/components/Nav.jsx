@@ -14,7 +14,7 @@ class Nav extends React.Component {
 		  <form onSubmit={this.props.fetchBusinesses}>
     		<ul className="nav navbar-nav">
 			  <li className="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 					<label> Contact Group: </label> {' '}
 		 					<select value={this.props.searchParams.businessCategory} onChange={this.props.handleBusinessCategoryChange}>
 		            <option value="Auto Repair">Auto Repair</option>
