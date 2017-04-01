@@ -6,13 +6,29 @@ import $ from 'jquery';
 class Threads extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      threads: []
+    }
+    this.fetchThreads();
+  }
+
+  fetchThreads() {
+    console.log('fetching threads');
+    $.get('/threads', {}, (data) => {
+      this.setState({
+        threads: data
+      });
+      console.log(this.state.threads);
+    });
+
   }
 
   render() {
     return (  
       <div className="threads">
         {
-          this.props.threads.map((thread) => {
+          this.state.threads.map((thread) => {
+            console.log('thread: ', thread);
             return <Thread thread={thread} key={thread._id}/>
           })
         }

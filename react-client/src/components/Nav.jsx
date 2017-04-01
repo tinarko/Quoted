@@ -2,25 +2,27 @@ import ReactDOM from 'react-dom';
 // import React from 'react';
 import ListItem from './ListItem.jsx';
 import $ from 'jquery';
+import {HashRouter, Route, IndexRoute, Link} from 'react-router-dom';
 import React, { Component, PropTypes } from 'react';
 
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClickPastThreads = this.handleClickPastThreads.bind(this);
+    // this.handleClickPastThreads = this.handleClickPastThreads.bind(this);
   }
 
-  handleClickPastThreads (event) {
-  	event.preventDefault();
-  	this.context.router.history.push('/ThreadView');
-  }
+  // handleClickPastThreads (event) {
+  // 	event.preventDefault();
+  // 	this.context.router.history.push('/ThreadView');
+  // }
 
   render() {
     return (
 	  <nav className="navbar navbar-default"> 
 		<div className="container-fluid">
   	<div>
-  		<button onClick={this.handleClickPastThreads}>Past Threads</button>
+  		<button><Link to="/">Home</Link></button>
+  		<button><Link to="/threads">Past Threads</Link></button>
   	</div>
 		  <form onSubmit={this.props.fetchBusinesses}>
     		<ul className="nav navbar-nav">
