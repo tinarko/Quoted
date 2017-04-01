@@ -42,4 +42,4 @@ var findResponsesFromContactNumber = function(fromNumber, callback) {
 
 module.exports.Responses = Responses;
 module.exports.createResponse = createResponse;
-// module.exports.findResponsesFromContactNumber = findResponsesFromContactNumber;
+module.exports.findResponsesFromContactNumber = findResponsesFromContactNumber;

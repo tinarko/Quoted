@@ -110,10 +110,11 @@ exports.receiveText = function(req, res) {
 
   // var twilio = require('twilio');
   responsesdb.createResponse(fromNumber, inboundMsg, function(err, data) {
-    console.log('GOT THE NUMBER!', fromNumber);
-    console.log('GOT THE MSG!', inboundMsg);
+    // console.log('GOT THE NUMBER!', fromNumber);
+    // console.log('GOT THE MSG!', inboundMsg);
     if (err) {
-      throw err;
+      res.status(500).send(err);
+      return;
     } else {
       twiml.message('From Forkly: Thanks for your text!');
       res.writeHead(200, {'Content-Type': 'text/xml'});
@@ -123,8 +124,17 @@ exports.receiveText = function(req, res) {
 };
 
 // finding texts in db from specific user 
-exports.findTextsFromNumber = function(req, res) {
+exports.findResponsesFromContactNumber = function(req, res) {
+  let fromNumber = req.params.number;
 
+  responsesdb.findResponsesFromContactNumber(fromNumber, function(err, data) {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    } else {
+      res.send(data);
+    }
+  });
 }
 
 exports.callBusinesses = function(req, res) {

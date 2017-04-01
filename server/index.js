@@ -64,7 +64,7 @@ app.post('/businesses', handler.checkBusinessData);
 app.post('/messages', handler.textBusinesses);
 app.post('/', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
 // app.post('/sms', handler.receiveText); 
-// app.post('/findText/:user', handler.findText);
+app.get('/findText/:number', handler.findResponsesFromContactNumber);
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
@@ -75,10 +75,6 @@ app.set('port', (3000));
 app.listen(app.get('port'), function() {
   console.log('listening on on port:' + app.get('port'));
 });
-
-
-
-
 
 
 // OTHER COMMENTS FROM GREENFIELD BROS... SHOULD WE DELETE THIS..?
