@@ -1,6 +1,4 @@
-require('dotenv').config()
-console.log('TWILIO SID', process.env.TWILIO_ACCOUNT_SID);
-
+require('../config/config.js');
 // var setup = require('./auth.js');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -11,7 +9,6 @@ var handler = require('./request-handler');
 // var session = require('express-session');
 var facebook = require('./facebook.js');
 var passport = require('passport');
-var path = require('path');
 var s3Router = require('./s3Router');
 var loadExampleData = require('./loadExampleData').loadExampleData;
 var multer = require('multer');
