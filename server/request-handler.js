@@ -138,7 +138,6 @@ exports.findResponsesFromContactNumber = function(req, res) {
   });
 };
 
-<<<<<<< HEAD
 exports.createNewThread = function(req, res) {
   let groupName = req.params.groupName;
   
@@ -151,34 +150,6 @@ exports.createNewThread = function(req, res) {
     }
   });
 };
-
-=======
-// exports.createNewThread = function(req, res) {
-//   threaddb.createNewThread(function(err, data) {
-//     if (err) {
-//       res.status(500).send(err);
-//       return;
-//     } else {
-//       res.send();
-//     }
-//   });
-// };
-
-
-// var createNewThread = function(callback) {
-//   console.log('Creating new thread')
-//   Threads.create({
-
-//   }, function(err, data) {
-//     if (err) {
-//       callback(err, null);
-//     } else {
-//       console.log('data', data);
-//       callback(null, data);
-//     }
-//   });
-// }
->>>>>>> (feat/threads) start to add db changes for threads
 
 exports.callBusinesses = function(req, res) {
 
