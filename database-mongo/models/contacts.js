@@ -2,8 +2,8 @@ var db = require('../index.js');
 var mongoose = require('mongoose');
 
 var contactsSchema = mongoose.Schema({
-  businessName: {type: String, unique: true },
-  businessPhone: Number,
+  contactName: {type: String, unique: true },
+  contactPhoneNumber: Number,
   businessType: [String], //Changed from Array
   businessCity: String,
   businessAddress: String,

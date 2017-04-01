@@ -11,6 +11,7 @@ var facebook = require('./facebook.js');
 var passport = require('passport');
 var s3Router = require('./s3Router');
 var loadExampleData = require('./loadExampleData').loadExampleData;
+var threadsExampleData = require('./threadsExampleData').threadsExampleData;
 var multer = require('multer');
 var storage = multer.diskStorage({
   destination: './uploads/',
@@ -69,7 +70,11 @@ app.get('/findText/:number', handler.findResponsesFromContactNumber);
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
-// app.get('/contactList', handler.retrieveContacts);
+
+// get request handler for threads
+app.get('/threads', (req, res) => {
+  res.send(threadsExampleData);
+});
 
 let port = process.env.PORT || 3000;
 
