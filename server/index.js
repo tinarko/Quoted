@@ -36,23 +36,19 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 var http = require('http');
-loadExampleData();
-
 var app = express();
+
+loadExampleData();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/../react-client/dist'));
-
-
 app.use(express.session({secret: 'Greenfie1dBr0s'}));
-
 app.use(express.cookieParser());
 
- app.use(passport.initialize());
- app.use(passport.session());
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 // facebook passport
 app.get('/auth/facebook',
@@ -61,13 +57,27 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/' }));
 
-//router for S3
-// app.use('/s3', s3Router({
-//   bucket: 'hrsf72-quoted-app',
-//   ACL: 'public-read-write'
-// }))
+app.post('/user/addcontacts', upload.single('file'), handler.userAddcontacts);
+app.post('/businesses', handler.checkBusinessData);
+
+// SMS
+app.post('/messages', handler.textBusinesses);
+app.post('/', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
+// app.post('/sms', handler.receiveText); 
+app.get('/findText/:number', handler.findResponsesFromContactNumber);
+
+app.post('/call', handler.callBusinesses)  
+app.post('/voice', handler.setVoiceMessage);
+let port = process.env.PORT || 3000;
+//Deployment ports
+app.set('port', (port));
+
+app.listen(port, function() {
+  console.log('listening on on port:' + port);
+});
 
 
+// OTHER COMMENTS FROM GREENFIELD BROS... SHOULD WE DELETE THIS..?
 
 // app.get('/user', function(req, res){ 
 //   var sessionCheck = req.session ? !!req.session.username : false;
@@ -137,6 +147,7 @@ app.get('/auth/facebook/callback',
 // app.post('/user/signup', handler.userSignUp);
 // app.post('/user/login', handler.userLogin);
 // app.get('/user/logout', handler.userLogout);
+
 
 app.post('/user/addcontacts', upload.single('file'), handler.userAddcontacts);
 app.post('/businesses', handler.checkBusinessData);
