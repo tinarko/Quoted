@@ -16,6 +16,7 @@ var Threads = mongoose.model('Threads', threadsSchema);
 var createNewThread = function(groupName, callback) {
   console.log('Creating new thread');
   Threads.create({
+    // outboundMsg: outboundMsg,
     groupName: groupName
   }, function(err, data) {
     if (err) {
@@ -28,5 +29,4 @@ var createNewThread = function(groupName, callback) {
 }
 
 module.exports.Threads = Threads;
-
 module.exports.createNewThread = createNewThread;
