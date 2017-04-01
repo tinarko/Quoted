@@ -139,13 +139,17 @@ exports.findResponsesFromContactNumber = function(req, res) {
 
 exports.createNewThread = function(req, res) {
   let groupName = req.params.groupName;
+  let outboundMsg = req.params.outboundMsg;
+  let query = req.query;
+  console.log(outboundMsg);
+  console.log(query);
   
   threadsdb.createNewThread(groupName, function(err, data) {
     if (err) {
       res.status(500).send(err);
       return;
     } else {
-      res.send();
+      res.send(groupName);
     }
   });
 };
