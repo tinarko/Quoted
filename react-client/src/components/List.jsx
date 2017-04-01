@@ -12,7 +12,7 @@ class List extends React.Component {
       <div className="list"> 
         <div className="form-group">
           <input className="checkbox" type="checkbox" id="checkAll"/>
-          <label className="toggleAll" for="checkAll">ToggleAll</label>
+          <label className="toggleAll" htmlFor="checkAll">ToggleAll</label>
         </div> 
         {
           this.props.businesses.map((business) => {

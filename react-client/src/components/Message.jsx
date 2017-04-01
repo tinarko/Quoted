@@ -18,7 +18,7 @@ class Message extends React.Component {
   render() {
     return (            
       <div className="form-group message">
-      <label for="textArea" className="col-lg-4 control-label">Message</label>
+      <label htmlFor="textArea" className="col-lg-4 control-label">Message</label>
       <div >
         <textarea className="form-control col-md-8" rows="8" id="textArea" onChange={(e) => {this.props.handleTextInputChange(e)}}></textarea>
         <span className="help-block">Enter your text message here</span>
