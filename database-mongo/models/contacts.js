@@ -25,13 +25,13 @@ contactsSchema.pre('save', function(next) {
 
 var Contacts = mongoose.model('Contacts', contactsSchema);
 
-var addContact = function(businessName, businessPhone, businessType) {
+var addContact = function(contactName, contactPhoneNumber, businessType) {
   if (arguments.length <= 2) {
     businessType = 'HRSF72';
   }
   Contacts.create({
-    businessName: businessName,
-    businessPhone: businessPhone,
+    contactName: contactName,
+    contactPhoneNumber: contactPhoneNumber,
     businessType: businessType,
     businessCity: 'San Francisco',
     businessAddress: 'Hack Reactor 6th Floor',
