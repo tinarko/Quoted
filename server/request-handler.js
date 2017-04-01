@@ -6,7 +6,11 @@ var db = require('../database-mongo/index.js');
 var contactsdb = require('../database-mongo/models/contacts.js');
 var Users = require('../database-mongo/models/user.js');
 var responsesdb = require('../database-mongo/models/responses.js');
+<<<<<<< HEAD
 var threadsdb = require('../database-mongo/models/threads.js');
+=======
+var threaddb = require('../database-mongo/models/responses.js');
+>>>>>>> b534c9606a5a4e779996e91697bf4ed263d3b4b6
 
 //Yelp
 var yelp = require('./yelp/yelp-query.js');
@@ -149,7 +153,6 @@ exports.createNewThread = function(req, res) {
     }
   });
 };
-
 
 exports.callBusinesses = function(req, res) {
 
