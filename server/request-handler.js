@@ -22,6 +22,9 @@ var phoneNumber = process.env.TWILIO_NUMBER;
 //require the Twilio module and create a REST client
 var client = require('twilio')(accountSid, authToken);
 
+//require formatter for adding contacts via file upload
+var phoneNumberFormatter = require('phone');
+
 exports.checkBusinessData = function(req, res) {
   // console.log('REQ USER IS', req.user);
   var category = req.body.category;
@@ -217,11 +220,21 @@ exports.setVoiceMessage = function(req, res) {
 };
 
 exports.userAddcontacts = function(req, res) {
-  if (req.file && req.file.originalname) {
-    console.log(`Received file ${req.file.originalname}`);
+  var contacts = req.file.buffer
+  .toString('ascii')
+  .trim()
+  .split('\n');
+
+  contacts = contacts.map((contact) => {
+    contact = contact.split(',');
+    contact[1] = phoneNumberFormatter(contact[1], contact[2] || 'US')[0].slice(2);
+    return contact;
+  });
+  for (let contact of contacts) {
+    contactsdb.addContact(...contact);
   }
 
-  res.send({ responseText: req.file.path }); // You can send any response to the user here
+  res.send({ responseText: req.file.path });
 };
 
 
