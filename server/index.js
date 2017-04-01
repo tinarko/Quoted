@@ -147,3 +147,23 @@ app.listen(port, function() {
 // app.post('/user/signup', handler.userSignUp);
 // app.post('/user/login', handler.userLogin);
 // app.get('/user/logout', handler.userLogout);
+
+
+app.post('/user/addcontacts', upload.single('file'), handler.userAddcontacts);
+app.post('/businesses', handler.checkBusinessData);
+
+// SMS
+app.post('/messages', handler.textBusinesses);
+// app.post('/sms', handler.receiveText);
+app.post('/', handler.receiveText);
+
+app.post('/call', handler.callBusinesses)  
+app.post('/voice', handler.setVoiceMessage);
+let port = process.env.PORT || 3000;
+//Deployment ports
+app.set('port', (port));
+
+app.listen(port, function() {
+  console.log('listening on on port:' + port);
+});
+
