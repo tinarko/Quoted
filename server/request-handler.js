@@ -1,12 +1,12 @@
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
 
-
 //database
 var db = require('../database-mongo/index.js');
 var contactsdb = require('../database-mongo/models/contacts.js');
 var Users = require('../database-mongo/models/user.js');
 var responsesdb = require('../database-mongo/models/responses.js');
+var threadsdb = require('../database-mongo/models/threads.js');
 
 //Yelp
 var yelp = require('./yelp/yelp-query.js');
@@ -49,7 +49,6 @@ exports.checkBusinessData = function(req, res) {
       }
     });
 };
-
 
 exports.textBusinesses = function(req, res) {
   // console.log('getting response from client'); 
@@ -136,7 +135,20 @@ exports.findResponsesFromContactNumber = function(req, res) {
       res.send(data);
     }
   });
-}
+};
+
+exports.createNewThread = function(req, res) {
+  let groupName = req.params.groupName;
+  
+  threadsdb.createNewThread(groupName, function(err, data) {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    } else {
+      res.send();
+    }
+  });
+};
 
 exports.callBusinesses = function(req, res) {
 

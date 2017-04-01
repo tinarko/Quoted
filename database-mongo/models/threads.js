@@ -1,17 +1,32 @@
 var db = require('../index.js');
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 // Threads schema
 
-var threadssSchema = new Schema({
+var threadsSchema = new Schema({
   outboundMsg: String,
   groupName: String,
   contacts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contacts'}],
-  // adding responses array
   responses: Array
-  // responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Responses'}]
 });
 
 var Threads = mongoose.model('Threads', threadsSchema);
 
-module.exports = Threads;
+var createNewThread = function(groupName, callback) {
+  console.log('Creating new thread');
+  Threads.create({
+    groupName: groupName
+  }, function(err, data) {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log('data', data);
+      callback(null, data);
+    }
+  });
+}
+
+module.exports.Threads = Threads;
+
+module.exports.createNewThread = createNewThread;
