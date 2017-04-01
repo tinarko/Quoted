@@ -65,6 +65,7 @@ app.post('/messages', handler.textBusinesses);
 app.post('/', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
 // app.post('/sms', handler.receiveText); 
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
+// app.post('/createNewThread', handler.createNewThread);
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
