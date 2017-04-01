@@ -70,6 +70,8 @@ app.post('/createNewThread/:groupName', handler.createNewThread);
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
 // app.post('/createNewThread', handler.createNewThread);
 
+
+
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
 
