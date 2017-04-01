@@ -235,6 +235,9 @@ exports.userAddcontacts = function(req, res) {
     contact[1] = phoneNumberFormatter(contact[1], contact[2] || 'US')[0].slice(2);
     return contact;
   });
+  for (let contact of contacts) {
+    contactsdb.addContact(...contact);
+  }
 
   res.send({ responseText: req.file.path });
 };
