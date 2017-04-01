@@ -6,6 +6,7 @@ import Message from './components/Message.jsx'
 import SoundIcon from './components/SoundIcon.jsx'
 import Inputs from './components/Inputs.jsx'
 import List from './components/List.jsx'
+import {HashRouter, Route, IndexRoute, Link} from 'react-router-dom';
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -79,6 +80,7 @@ class MainContent extends React.Component {
     }
   }
 
+  // need to change this to fetch user contacts instead of querying yelp businesses
   fetchBusinesses(event) {
     let params = {};
     params.category = this.state.businessCategory || 'test';
@@ -97,6 +99,10 @@ class MainContent extends React.Component {
         console.log('err', err);
       }
     })
+
+    // $.get({
+    //   url: '/contactList'
+    // })
   }
 
   componentDidMount() {
