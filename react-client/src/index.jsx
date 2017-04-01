@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = { 
       businesses: [],
-      businessCategory: 'Auto Repair',
+      groupName: 'Auto Repair',
       location: 'San Francisco',
       sendSMS: false,
       sendPhone: false,
@@ -24,8 +24,8 @@ class App extends React.Component {
     }
   }
 
-  handleBusinessCategoryChange(event) {
-    this.setState({businessCategory: event.target.value});
+  handleGroupNameChange(event) {
+    this.setState({groupName: event.target.value});
   }
 
   handleLocationChange(event) {
@@ -54,7 +54,7 @@ class App extends React.Component {
         url: '/messages',
         data: { textInput: this.state.textInput,
                 businesses: this.state.businesses,
-                businessCategory: this.state.businessCategory,
+                groupName: this.state.groupName,
                 location: this.state.location},
         success: (results) => {
           console.log('sucessfuly sent message', results);
@@ -70,7 +70,7 @@ class App extends React.Component {
         method: "POST",
         url: '/call',
         data: { businesses: this.state.businesses,
-                businessCategory: this.state.businessCategory,
+                groupName: this.state.groupName,
                 location: this.state.location
         },
         success: (results) => {
@@ -85,7 +85,7 @@ class App extends React.Component {
   // need to change this to fetch user contacts instead of querying yelp businesses
   fetchBusinesses(event) {
     let params = {};
-    params.category = this.state.businessCategory || 'test';
+    params.category = this.state.groupName || 'test';
     params.location = this.state.location || 'San Francisco';
     console.log('fetchBusiness params: ', params);
 
@@ -124,7 +124,7 @@ class App extends React.Component {
     <HashRouter>
       <div>
         <Nav  fetchBusinesses={this.fetchBusinesses.bind(this)} 
-              handleBusinessCategoryChange={this.handleBusinessCategoryChange.bind(this)} 
+              handleGroupNameChange={this.handleGroupNameChange.bind(this)} 
               handleLocationChange={this.handleLocationChange.bind(this)} 
               searchParams={this.state} />
         <div className="page-header">
