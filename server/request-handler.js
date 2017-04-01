@@ -6,7 +6,7 @@ var db = require('../database-mongo/index.js');
 var contactsdb = require('../database-mongo/models/contacts.js');
 var Users = require('../database-mongo/models/user.js');
 var responsesdb = require('../database-mongo/models/responses.js');
-var threaddb = require('../database-mongo/models/responses.js');
+var threadsdb = require('../database-mongo/models/threads.js');
 
 //Yelp
 var yelp = require('./yelp/yelp-query.js');
@@ -137,31 +137,19 @@ exports.findResponsesFromContactNumber = function(req, res) {
   });
 };
 
-// exports.createNewThread = function(req, res) {
-//   threaddb.createNewThread(function(err, data) {
-//     if (err) {
-//       res.status(500).send(err);
-//       return;
-//     } else {
-//       res.send();
-//     }
-//   });
-// };
+exports.createNewThread = function(req, res) {
+  let groupName = req.params.groupName;
+  
+  threadsdb.createNewThread(groupName, function(err, data) {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    } else {
+      res.send();
+    }
+  });
+};
 
-
-// var createNewThread = function(callback) {
-//   console.log('Creating new thread')
-//   Threads.create({
-
-//   }, function(err, data) {
-//     if (err) {
-//       callback(err, null);
-//     } else {
-//       console.log('data', data);
-//       callback(null, data);
-//     }
-//   });
-// }
 
 exports.callBusinesses = function(req, res) {
 
