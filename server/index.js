@@ -1,10 +1,12 @@
+require('dotenv').config()
+console.log('TWILIO SID', process.env.TWILIO_ACCOUNT_SID);
+
 // var setup = require('./auth.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var db = require('../database-mongo/index.js');
 var User = require('../database-mongo/models/user.js');
 var handler = require('./request-handler');
-require('dotenv').config()
 // var cookieParser = require('cookie-parser');
 // var session = require('express-session');
 var facebook = require('./facebook.js');
