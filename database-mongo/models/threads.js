@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 
 var Schema = mongoose.Schema;
 
+var Schema = mongoose.Schema;
+
 // Threads schema
 
 var threadsSchema = new Schema({
