@@ -151,7 +151,6 @@ exports.createNewThread = function(req, res) {
   });
 };
 
-
 exports.callBusinesses = function(req, res) {
 
   var businessType = req.body.businessCategory;
