@@ -104,6 +104,7 @@ overall: You need to run ngrok and expose your port to the public
 
 // webhook for SMS response
 exports.receiveText = function(req, res) {
+  console.log('RECEIVED TEXT', req.body);
   var inboundMsg = req.body.Body;
   var fromNumber = req.body.From;
   // to take out the leading '+1' for US. for example, +14085603553 will now be saved as 4085603553

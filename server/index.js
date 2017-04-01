@@ -62,7 +62,7 @@ app.post('/businesses', handler.checkBusinessData);
 
 // SMS
 app.post('/messages', handler.textBusinesses);
-app.post('/', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
+app.post('/sms', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
 // app.post('/sms', handler.receiveText); 
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
 
