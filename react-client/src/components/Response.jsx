@@ -12,15 +12,19 @@ class Response extends React.Component {
 
   handleChange(e) {
     this.setState({input: e.target.value});
-    console.log(e.target.value);
   }
 
   render() {
+    let ResponseContext = this;
     return (
-      <div className="response">
-        <div> {this.props.response.contactName} </div>
-        <div> {this.props.response.message} </div>
-      </div>
+      <ul>
+        {this.props.responses.map((response) => {
+          if (response.fromNumber === ResponseContext.props.contactPhoneNumber) {
+            return (<li key={response._id}>{response.inboundMsg}</li>)
+          }
+          })
+        }
+      </ul>
     )
   }
 }

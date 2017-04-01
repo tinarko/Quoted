@@ -112,14 +112,6 @@ class App extends React.Component {
   }
 
   render() {
-    // <HashRouter>
-    //       <div>
-    //           <Route exact path="/" component={MainContent} />
-    //           <Route path="/ThreadView" component={(props, state) => <Threads threads={this.state.threads} />}/>
-    //           <Route path="/SignUp" component={SignUp} />
-    //           <Route path="/Login" component={Login} />
-    //       </div>
-    // </ HashRouter>
     return (
     <HashRouter>
       <div>

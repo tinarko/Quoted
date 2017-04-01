@@ -81,7 +81,6 @@ let threadsExampleData = [
         inboundMsg: 'Nah'
       },
       {_id: 4,
-        contactName: 'Tina',
         fromNumber: '1234567893',
         inboundMsg: 'Beans'
       },
