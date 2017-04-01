@@ -5,7 +5,7 @@ var n = require('nonce')();
 var request = require('request');
 var qs = require('querystring');
 var Yelp = require('yelp');
-var Contacts = require('../../database-mongo/models/contacts.js')
+var contactsdb = require('../../database-mongo/models/contacts.js')
 var Promise = require('bluebird');
 
 var yelp = new Yelp({
@@ -24,7 +24,7 @@ yelp.queryApi = function(obj) {
         if (contact.location.address.length === 0) {
           contact.location.address = 'Serving ' + contact.location.city;
         }
-        Contacts.create({
+        contactsdb.Contacts.create({
           businessName: contact.name,
           businessPhone: contact.phone,
           businessAddress: contact.location.address,
@@ -44,6 +44,5 @@ yelp.queryApi = function(obj) {
     });
   });
 };
-
 
 module.exports = yelp;
