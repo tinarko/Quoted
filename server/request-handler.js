@@ -13,95 +13,43 @@ var yelp = require('./yelp/yelp-query.js');
 
 //Twillio Requirements
 var twilio = require('twilio');
-var twilioKeys = require('../twilio_api');
+// var twilioKeys = require('../twilio_api');
 var twiml = new twilio.TwimlResponse();
-var accountSid = twilioKeys.accountSid; 
-var authToken = twilioKeys.authToken;
-var phoneNumber = twilioKeys.phoneNumber;
+var accountSid = process.env.TWILIO_ACCOUNT_SID; 
+var authToken = process.env.TWILIO_AUTH_TOKEN;
+var phoneNumber = process.env.TWILIO_NUMBER;
+
 //require the Twilio module and create a REST client
 var client = require('twilio')(accountSid, authToken);
-
-
-// exports.createSalt = function() {
-//   return crypto.randomBytes(20).toString('hex');
-// };
 
 exports.checkBusinessData = function(req, res) {
   // console.log('REQ USER IS', req.user);
   var category = req.body.category;
   var location = req.body.location;
-	
+  
   //currently not being used
   // var term = req.body.term;
-	// var geolocationLat = req.body.geolocationLat;
-	// var geolocationLong = req.body.geolocationLong;	
+  // var geolocationLat = req.body.geolocationLat;
+  // var geolocationLong = req.body.geolocationLong;  
 
   contactsdb.Contacts.find({"businessType": category, "businessCity": location})
-		.exec(function(err, result) {
-			if (err) {
-          res.status(500).send("Something unexpected and horrendeous happened"); 	
-			} else {
+    .exec(function(err, result) {
+      if (err) {
+          res.status(500).send("Something unexpected and horrendeous happened");  
+      } else {
         if(result.length <= 2) {
           yelp.queryApi({ 'term': category, 'location': location })
-					.then((results) => {
+          .then((results) => {
             // console.log('yelp query results: ', results);
-						res.json(results.businesses);
-					});
+            res.json(results.businesses);
+          });
         } else {            
           res.json(result); 
         }
       }
-		});
+    });
 };
 
-// exports.userSignUp = function(req, res) {
-//   var name = req.body.name;
-//   var username = req.body.username;
-//   var password = req.body.password;
-
-//   Users.findOne({ "username": username })
-//     .exec(function(err, user) {
-//       if (!user) {
-//         Users.create({'name': name, 'username': username, 'password': password});
-//         res.json('Account created');
-//       } else {
-//       	res.json('Account already exists');
-//         console.log('Account already exists');
-//       }
-//     });
-// };
-
-// exports.userLogin = function(req, res) {
-//   var username = req.body.username;
-//   var password = req.body.password;
-
-//   Users.findOne({ "username": username })
-//   	.exec(function(err, user) {
-//   		console.log('user logging in: ', user);
-//   		if (!user) {
-//         res.status(500).send("No such user");
-//       } else {
-//   			Users.comparePassword(password, user.password, function(err, match) {
-// 		  		if (err) {
-// 		  			res.status(404).send("Incorrect Password");
-// 		  		} else {
-// 		  			console.log('req session prior to reg: ', req.session);
-// 		  			  req.session.regenerate(function() {
-//               req.session.user = user;
-// 		  				console.log('req session after reg: ', req.session);		  				
-//               res.json(user);
-// 		  				});
-//   				}
-//   			});
-// 			}
-// 		});
-// };
-
-// exports.userLogout = function(req, res) {
-// 	req.session.destroy(function() {
-// 		res.redirect('/user/login');
-// 	})
-// };
 
 exports.textBusinesses = function(req, res) {
   // console.log('getting response from client'); 
@@ -162,12 +110,33 @@ exports.receiveText = function(req, res) {
   fromNumber = Number(req.body.From.slice(2)); 
 
   // var twilio = require('twilio');
-  responsesdb.createResponse(fromNumber, inboundMsg);
-  twiml.message('From Forkly: Thanks for your text!');
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  res.end(twiml.toString());
+  responsesdb.createResponse(fromNumber, inboundMsg, function(err, data) {
+    // console.log('GOT THE NUMBER!', fromNumber);
+    // console.log('GOT THE MSG!', inboundMsg);
+    if (err) {
+      res.status(500).send(err);
+      return;
+    } else {
+      twiml.message('From Forkly: Thanks for your text!');
+      res.writeHead(200, {'Content-Type': 'text/xml'});
+      res.end(twiml.toString());
+    }
+  });
 };
 
+// finding texts in db from specific user 
+exports.findResponsesFromContactNumber = function(req, res) {
+  let fromNumber = req.params.number;
+
+  responsesdb.findResponsesFromContactNumber(fromNumber, function(err, data) {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    } else {
+      res.send(data);
+    }
+  });
+}
 
 exports.callBusinesses = function(req, res) {
 
@@ -238,3 +207,59 @@ exports.userAddcontacts = function(req, res) {
 
   res.send({ responseText: req.file.path }); // You can send any response to the user here
 };
+
+
+// COMMENTS FROM GREENFIELD BROS: 
+
+// exports.createSalt = function() {
+//   return crypto.randomBytes(20).toString('hex');
+// };
+
+// exports.userSignUp = function(req, res) {
+//   var name = req.body.name;
+//   var username = req.body.username;
+//   var password = req.body.password;
+
+//   Users.findOne({ "username": username })
+//     .exec(function(err, user) {
+//       if (!user) {
+//         Users.create({'name': name, 'username': username, 'password': password});
+//         res.json('Account created');
+//       } else {
+//       	res.json('Account already exists');
+//         console.log('Account already exists');
+//       }
+//     });
+// };
+
+// exports.userLogin = function(req, res) {
+//   var username = req.body.username;
+//   var password = req.body.password;
+
+//   Users.findOne({ "username": username })
+//   	.exec(function(err, user) {
+//   		console.log('user logging in: ', user);
+//   		if (!user) {
+//         res.status(500).send("No such user");
+//       } else {
+//   			Users.comparePassword(password, user.password, function(err, match) {
+// 		  		if (err) {
+// 		  			res.status(404).send("Incorrect Password");
+// 		  		} else {
+// 		  			console.log('req session prior to reg: ', req.session);
+// 		  			  req.session.regenerate(function() {
+//               req.session.user = user;
+// 		  				console.log('req session after reg: ', req.session);		  				
+//               res.json(user);
+// 		  				});
+//   				}
+//   			});
+// 			}
+// 		});
+// };
+
+// exports.userLogout = function(req, res) {
+// 	req.session.destroy(function() {
+// 		res.redirect('/user/login');
+// 	})
+// };

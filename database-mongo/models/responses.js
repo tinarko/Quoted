@@ -1,6 +1,6 @@
 var db = require('../index.js');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 // Responses schema
 
@@ -12,17 +12,34 @@ var responsesSchema = new Schema({
 
 var Responses = mongoose.model('Responses', responsesSchema);
 
-var createResponse = function(fromNumber, inboundMsg) {
+var createResponse = function(fromNumber, inboundMsg, callback) {
+  console.log('creating Response in db')
   Responses.create({
   	fromNumber: fromNumber,
   	inboundMsg: inboundMsg
   }, function(err, data) {
   	if (err) {
-  	  throw err;
+  	  callback(err, null);
+  	} else {
+  	  console.log('data', data);
+  	  callback(null, data);
   	}
-  	console.log('data', data);
-  })
+  });
+}
+
+var findResponsesFromContactNumber = function(fromNumber, callback) {
+  Responses.find({
+  	fromNumber: fromNumber
+  }, function(err, data) {
+  	if (err) {
+  	  callback(err, null);
+  	} else {
+  	  console.log('data', data);
+  	  callback(null, data);
+  	}
+  });
 }
 
 module.exports.Responses = Responses;
 module.exports.createResponse = createResponse;
+module.exports.findResponsesFromContactNumber = findResponsesFromContactNumber;

@@ -1,0 +1,54 @@
+{
+  "name": "Quoted",
+  "scripts": {
+  },
+  "env": {
+    "FB_appID": {
+      "required": true
+    },
+    "FB_secret": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": true
+    },
+    "SITE_URL": {
+      "required": true
+    },
+    "TWILIO_ACCOUNT_SID": {
+      "required": true
+    },
+    "TWILIO_AUTH_TOKEN": {
+      "required": true
+    },
+    "TWILIO_NUMBER": {
+      "required": true
+    },
+    "YELP_consumerKey": {
+      "required": true
+    },
+    "YELP_consumerSecret": {
+      "required": true
+    },
+    "YELP_token": {
+      "required": true
+    },
+    "YELP_tokenSecret": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
