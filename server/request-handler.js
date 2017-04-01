@@ -17,9 +17,9 @@ var twilio = require('twilio');
 var twiml = new twilio.TwimlResponse();
 
 
-var accountSid = process.env.TWIL_accountSid; 
-var authToken = process.env.TWIL_authToken;
-var phoneNumber = process.env.TWIL_phoneNumber;
+var accountSid = process.env.TWILIO_ACCOUNT_SID; 
+var authToken = process.env.TWILIO_AUTH_TOKEN;
+var phoneNumber = process.env.TWILIO_NUMBER; 
 
 //require the Twilio module and create a REST client
 var client = require('twilio')(accountSid, authToken);
