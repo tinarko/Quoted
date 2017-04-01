@@ -44,9 +44,9 @@ class Login extends React.Component {
         <div className="container">
           <form className="form-signin">
             <h2 className="form-signin-heading">Please Sign In</h2>
-            <label for="inputEmail" className="sr-only">Username: </label>
+            <label htmlFor="inputEmail" className="sr-only">Username: </label>
             <input type="text" id="inputEmail" onChange={(e) => {this.setState({username: e.target.value})}} className="form-control" placeholder="Username" required autofocus />
-            <label for="inputPassword" className="sr-only">Password</label>
+            <label htmlFor="inputPassword" className="sr-only">Password</label>
             <input type="password" id="inputPassword" onChange={(e) => {this.setState({password: e.target.value})}} className="form-control" placeholder="Password" required />
             <div className="checkbox">
               <label>                
