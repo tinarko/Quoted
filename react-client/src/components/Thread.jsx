@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Response from './Response.jsx';
+import Contact from './Contact.jsx';
 import $ from 'jquery';
 
 class Thread extends React.Component {
@@ -9,6 +9,7 @@ class Thread extends React.Component {
   }
 
   render() {
+    var ThreadContext = this;
     return (
       <div>
         <h5><strong>Outbound Message: </strong>{this.props.thread.outboundMsg}</h5>
@@ -28,18 +29,8 @@ class Thread extends React.Component {
           {
             this.props.thread.contacts.map((contact) => {
               return (
-                <tr>
-                  <td>
-                    {contact.contactName}
-                  </td>
-                  <td>
-                    {contact.contactPhoneNumber}
-                  </td>
-                  <td>
-                  </td>
-                </tr>
+                <Contact key={contact._id} contactName={contact.contactName} contactPhoneNumber={contact.contactPhoneNumber} responses={ThreadContext.props.thread.responses}/>
               )
-            // <Responses response={response} key={response._id}/>
             })
           }
         </table>
