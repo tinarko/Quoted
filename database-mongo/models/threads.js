@@ -29,4 +29,5 @@ var createNewThread = function(groupName, callback) {
 }
 
 module.exports.Threads = Threads;
-module.exports.createNewThread = createNewThread;\
+
+module.exports.createNewThread = createNewThread;

@@ -149,6 +149,10 @@ exports.createNewThread = function(req, res) {
     }
   });
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> (feat/threads) add ability to create a new thread
 
 exports.callBusinesses = function(req, res) {
 
