@@ -61,7 +61,7 @@ exports.textBusinesses = function(req, res) {
   // var location = "San Francisco" // req.body.    locationCity? 
   
   //change this so that we're sending text to req.body.businesses
-  var businessType = req.body.businessCategory;
+  var businessType = req.body.groupName;
   var location = req.body.location;
 
   contactsdb.Contacts.find({businessType: businessType, businessCity: location}, function(err, businesses){
@@ -139,20 +139,24 @@ exports.findResponsesFromContactNumber = function(req, res) {
 
 exports.createNewThread = function(req, res) {
   let groupName = req.params.groupName;
+  let outboundMsg = req.params.outboundMsg;
+  let query = req.query;
+  console.log(outboundMsg);
+  console.log(query);
   
   threadsdb.createNewThread(groupName, function(err, data) {
     if (err) {
       res.status(500).send(err);
       return;
     } else {
-      res.send();
+      res.send(groupName);
     }
   });
 };
 
 exports.callBusinesses = function(req, res) {
 
-  var businessType = req.body.businessCategory;
+  var businessType = req.body.groupName;
   var location = req.body.location;
   // console.log('request body', req.body);
   // console.log('businessType', businessType);

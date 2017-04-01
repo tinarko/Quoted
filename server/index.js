@@ -63,11 +63,10 @@ app.post('/businesses', handler.checkBusinessData);
 
 // SMS
 app.post('/messages', handler.textBusinesses);
-app.post('/', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
-app.post('/createNewThread/:groupName', handler.createNewThread);
-// app.post('/sms', handler.receiveText); 
+app.post('/sms', handler.receiveText);
+app.post('/createNewThread/group/:groupName', handler.createNewThread);
+
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
-// app.post('/createNewThread', handler.createNewThread);
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
