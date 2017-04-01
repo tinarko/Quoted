@@ -68,8 +68,11 @@ app.post('/createNewThread/:groupName', handler.createNewThread);
 // app.post('/sms', handler.receiveText); 
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
 // app.post('/createNewThread', handler.createNewThread);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> de61d343019d4c999c00d818303ffbd3b154b659
 
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);

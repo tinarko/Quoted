@@ -1,6 +1,9 @@
 var db = require('../index.js');
 var mongoose = require('mongoose');
+<<<<<<< HEAD
 
+=======
+>>>>>>> de61d343019d4c999c00d818303ffbd3b154b659
 var Schema = mongoose.Schema;
 
 // Threads schema
@@ -14,7 +17,10 @@ var threadsSchema = new Schema({
 
 var Threads = mongoose.model('Threads', threadsSchema);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> de61d343019d4c999c00d818303ffbd3b154b659
 var createNewThread = function(groupName, callback) {
   console.log('Creating new thread');
   Threads.create({
