@@ -22,6 +22,7 @@ var authToken = process.env.TWILIO_AUTH_TOKEN;
 var phoneNumber = process.env.TWILIO_NUMBER;
 >>>>>>> Have changes to Twilio API keys
 
+
 //require the Twilio module and create a REST client
 var client = require('twilio')(accountSid, authToken);
 
