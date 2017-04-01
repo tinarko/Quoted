@@ -69,8 +69,6 @@ app.post('/createNewThread/:groupName', handler.createNewThread);
 // app.post('/sms', handler.receiveText); 
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
 
-
-
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
 
