@@ -160,8 +160,6 @@ app.post('/', handler.receiveText);
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
 let port = process.env.PORT || 3000;
-//Deployment ports
-app.set('port', (port));
 
 app.listen(port, function() {
   console.log('listening on on port:' + port);
