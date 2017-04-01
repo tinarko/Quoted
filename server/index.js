@@ -13,28 +13,7 @@ var s3Router = require('./s3Router');
 var loadExampleData = require('./loadExampleData').loadExampleData;
 var threadsExampleData = require('./threadsExampleData').threadsExampleData;
 var multer = require('multer');
-var storage = multer.diskStorage({
-  destination: './uploads/',
-  filename: function (req, file, cb) {
-    // Mimetype stores the file type, set extensions according to filetype
-    switch (file.mimetype) {
-    case 'image/jpeg':
-      ext = '.jpeg';
-      break;
-    case 'image/png':
-      ext = '.png';
-      break;
-    case 'image/gif':
-      ext = '.gif';
-      break;
-    case 'text/csv':
-      ext = '.csv';
-      break;
-    }
-
-    cb(null, file.originalname.slice(0, 4) + Date.now() + ext);
-  }
-});
+var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
 var http = require('http');
 var app = express();
