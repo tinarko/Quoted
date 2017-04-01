@@ -2,5 +2,5 @@
 
 var dotenv = require('dotenv');
 dotenv.load();
-dotenv.config({path: '/Users/johnduong/Documents/GitHub/Quoted/config.env'});
-console.log('config');
+dotenv.config({path: process.env.PWD + '/config.env'});
+console.log(process.env.PWD + '/config.env');
