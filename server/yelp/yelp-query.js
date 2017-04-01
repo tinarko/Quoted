@@ -1,5 +1,5 @@
 //Yelp Requirements
-var yelpApi = require('../../yelp_api');
+// var yelpApi = require('../../yelp_api');
 var oauthSignature = require('oauth-signature');
 var n = require('nonce')();
 var request = require('request');

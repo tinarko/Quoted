@@ -13,7 +13,7 @@ var yelp = require('./yelp/yelp-query.js');
 
 //Twillio Requirements
 var twilio = require('twilio');
-var twilioKeys = require('../twilio_api');
+// var twilioKeys = require('../twilio_api');
 var twiml = new twilio.TwimlResponse();
 
 var accountSid = process.env.TWIL_accountSid; 
