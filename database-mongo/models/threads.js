@@ -1,6 +1,5 @@
 var db = require('../index.js');
 var mongoose = require('mongoose');
-
 var Schema = mongoose.Schema;
 
 // Threads schema
