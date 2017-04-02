@@ -228,9 +228,13 @@ exports.userAddcontacts = function(req, res) {
 
   contacts = contacts.map((contact) => {
     contact = contact.split(',');
+    console.log('contact after split', contact);
+    console.log('formatter', phoneNumberFormatter(contact[1], contact[2] || 'US'));
     contact[1] = phoneNumberFormatter(contact[1], contact[2] || 'US')[0].slice(2);
     return contact;
   });
+
+  console.log('at server, contacts = ', contacts);
 
   // contacts looks like [[name, number], [name, number]]
 
@@ -240,8 +244,8 @@ exports.userAddcontacts = function(req, res) {
  //  }
 
  //  res.send({ responseText: req.file.path });
-
  // WILL INSTEAD send contacts back to FileUpload component to be stored in state
+   // res.send(JSON.stringify(contacts));
    res.json(contacts);
 
 };
