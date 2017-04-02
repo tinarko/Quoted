@@ -46,10 +46,12 @@ class Inputs extends React.Component {
       $.ajax({
         method: "POST",
         url: '/messages',
-        data: { textInput: this.state.textInput,
-                businesses: this.props.state.businesses,
-                groupName: this.props.state.groupName,
-                location: this.props.state.location},
+        data: 
+          { textInput: this.state.textInput,
+            businesses: this.props.state.businesses,
+            groupName: this.props.state.groupName,
+            location: this.props.state.location
+          },
         success: (results) => {
           console.log('sucessfuly sent message', results);
         }, error: (err) => {  
@@ -63,13 +65,15 @@ class Inputs extends React.Component {
       $.ajax({
         method: "POST",
         url: '/call',
-        data: { businesses: this.state.businesses,
-                groupName: this.state.groupName,
-                location: this.state.location
-        },
+        data: 
+          { businesses: this.state.businesses,
+            groupName: this.state.groupName,
+            location: this.state.location
+          },
         success: (results) => {
           console.log('successfully sent call', results);
-        }, error: (err) => {
+          }, 
+        error: (err) => {
           console.log('err in call', err);
         }
       })
