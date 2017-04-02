@@ -37,6 +37,44 @@ class Inputs extends React.Component {
   //   console.log(this.state.textInput);
   // }
 
+  sendInfo() {
+    console.log('Trying to send info', this.state.textInput);
+
+    //Send data to server to send text messages
+    if (this.state.sendSMS === true){
+      $.ajax({
+        method: "POST",
+        url: '/messages',
+        data: { textInput: this.state.textInput,
+                businesses: this.state.businesses,
+                groupName: this.state.groupName,
+                location: this.state.location},
+        success: (results) => {
+          console.log('sucessfuly sent message', results);
+        }, error: (err) => {  
+          console.log('err recieved', err);
+        }
+      })
+    }
+
+    //Send data to server to send phone calls
+    if (this.state.sendPhone === true) {
+      $.ajax({
+        method: "POST",
+        url: '/call',
+        data: { businesses: this.state.businesses,
+                groupName: this.state.groupName,
+                location: this.state.location
+        },
+        success: (results) => {
+          console.log('successfully sent call', results);
+        }, error: (err) => {
+          console.log('err in call', err);
+        }
+      })
+    }
+  }
+
   // sendInfo() {
   //   console.log('Trying to send info', this.state.textInput);
 
@@ -64,6 +102,8 @@ class Inputs extends React.Component {
   //   })
   // }
 
+
+
   render() {
     return (                  
       <div className="row inputs"> 
@@ -77,12 +117,13 @@ class Inputs extends React.Component {
               <td><input  type="checkbox" 
                           name="sendPhone"
                           value={this.props.state.sendPhone}
-                          onClick={this.props.handleCheckBox} /> Send Phone Message </td> 
+                          onClick={this.handleCheckBox.bind(this)} /> Send Phone Message </td> 
             </tr>                         
           </tbody>
           <Message handleTextInputChange={this.handleTextInputChange.bind(this)}/>         
           <SoundIcon recordingPublicUrl={this.props.recordingPublicUrl} />        
-          <button onClick={this.props.sendInfo} className="btn btn-primary"> Contact your group </button>
+          <button onClick={this.sendInfo.bind(this)} 
+          className="btn btn-primary"> Contact your group </button>
           </div>
       </div>
     )
