@@ -26,7 +26,7 @@ var client = require('twilio')(accountSid, authToken);
 var phoneNumberFormatter = require('phone');
 
 exports.checkBusinessData = function(req, res) {
-  // console.log('REQ USER IS', req.user);
+  console.log('REQ USER IS', req.user);
   var category = req.body.category;
   var location = req.body.location;
   
@@ -106,6 +106,7 @@ overall: You need to run ngrok and expose your port to the public
 
 // webhook for SMS response
 exports.receiveText = function(req, res) {
+  console.log('RECEIVED TEXT', req.body);
   var inboundMsg = req.body.Body;
   var fromNumber = req.body.From;
   // to take out the leading '+1' for US. for example, +14085603553 will now be saved as 4085603553
