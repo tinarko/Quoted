@@ -39,6 +39,7 @@ class Inputs extends React.Component {
 
   sendInfo() {
     console.log('Trying to send info', this.state.textInput);
+    // console.log('groups: ', this.props.state.businesses);
 
     //Send data to server to send text messages
     if (this.state.sendSMS === true){
@@ -46,9 +47,9 @@ class Inputs extends React.Component {
         method: "POST",
         url: '/messages',
         data: { textInput: this.state.textInput,
-                businesses: this.state.businesses,
-                groupName: this.state.groupName,
-                location: this.state.location},
+                businesses: this.props.state.businesses,
+                groupName: this.props.state.groupName,
+                location: this.props.state.location},
         success: (results) => {
           console.log('sucessfuly sent message', results);
         }, error: (err) => {  
