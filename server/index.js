@@ -30,6 +30,7 @@ app.use(express.cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 // facebook passport
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
@@ -57,9 +58,6 @@ app.get('/threads', (req, res) => {
 });
 
 let port = process.env.PORT || 3000;
-
-//Deployment ports
-app.set('port', (port));
 
 app.listen(port, function() {
   console.log('listening on on port:' + port);

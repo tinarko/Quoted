@@ -26,7 +26,7 @@ var client = require('twilio')(accountSid, authToken);
 var phoneNumberFormatter = require('phone');
 
 exports.checkBusinessData = function(req, res) {
-  // console.log('REQ USER IS', req.user);
+  console.log('REQ USER IS', req.user);
   var category = req.body.category;
   var location = req.body.location;
   

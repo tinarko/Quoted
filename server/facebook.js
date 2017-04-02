@@ -14,9 +14,9 @@ passport.use(new FacebookStrategy({
     callbackURL: process.env.SITE_URL + 'auth/facebook/callback/'
   },
    function(accessToken, refreshToken, profile, done) {
-      // console.log('profile: ', profile);
-      // console.log('accessToken', accessToken);
-      // console.log('refreshToken', refreshToken);
+      console.log('profile: ', profile);
+      console.log('accessToken', accessToken);
+      console.log('refreshToken', refreshToken);
        //check user table for anyone with a facebook ID of profile.id
        User.findOne({
            'facebook.id': profile.id
@@ -38,7 +38,7 @@ passport.use(new FacebookStrategy({
                    return done(err, user);
                });
            } else {
-            // console.log('hello user', user);
+            console.log('hello user', user);
                //found user. Return
                return done(err, user);
            }
