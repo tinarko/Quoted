@@ -37,43 +37,43 @@ class App extends React.Component {
 
 
 
-  sendInfo() {
-    console.log('Trying to send info', this.state.textInput);
+  // sendInfo() {
+  //   console.log('Trying to send info', this.state.textInput);
 
-    //Send data to server to send text messages
-    if (this.state.sendSMS === true){
-      $.ajax({
-        method: "POST",
-        url: '/messages',
-        data: { textInput: this.state.textInput,
-                businesses: this.state.businesses,
-                groupName: this.state.groupName,
-                location: this.state.location},
-        success: (results) => {
-          console.log('sucessfuly sent message', results);
-        }, error: (err) => {  
-          console.log('err recieved', err);
-        }
-      })
-    }
+  //   //Send data to server to send text messages
+  //   if (this.state.sendSMS === true){
+  //     $.ajax({
+  //       method: "POST",
+  //       url: '/messages',
+  //       data: { textInput: this.state.textInput,
+  //               businesses: this.state.businesses,
+  //               groupName: this.state.groupName,
+  //               location: this.state.location},
+  //       success: (results) => {
+  //         console.log('sucessfuly sent message', results);
+  //       }, error: (err) => {  
+  //         console.log('err recieved', err);
+  //       }
+  //     })
+  //   }
 
-    //Send data to server to send phone calls
-    if (this.state.sendPhone === true) {
-      $.ajax({
-        method: "POST",
-        url: '/call',
-        data: { businesses: this.state.businesses,
-                groupName: this.state.groupName,
-                location: this.state.location
-        },
-        success: (results) => {
-          console.log('successfully sent call', results);
-        }, error: (err) => {
-          console.log('err in call', err);
-        }
-      })
-    }
-  }
+  //   //Send data to server to send phone calls
+  //   if (this.state.sendPhone === true) {
+  //     $.ajax({
+  //       method: "POST",
+  //       url: '/call',
+  //       data: { businesses: this.state.businesses,
+  //               groupName: this.state.groupName,
+  //               location: this.state.location
+  //       },
+  //       success: (results) => {
+  //         console.log('successfully sent call', results);
+  //       }, error: (err) => {
+  //         console.log('err in call', err);
+  //       }
+  //     })
+  //   }
+  // }
 
   // need to change this to fetch user contacts instead of querying yelp businesses
   fetchBusinesses(event) {
@@ -118,10 +118,7 @@ class App extends React.Component {
         <Route exact path="/" component={() => {
           return (
             <div>
-            <Inputs 
-                    
-                    sendInfo = {this.sendInfo.bind(this)}
-                    state={this.state} /> 
+            <Inputs state={this.state} /> 
             <List businesses={this.state.businesses} 
                   fetchBusinesses={this.fetchBusinesses.bind(this)} />        
           </div>
