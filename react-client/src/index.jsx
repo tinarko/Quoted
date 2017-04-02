@@ -22,7 +22,6 @@ class App extends React.Component {
       sendPhone: false,
       textInput: '',
       recordingPublicUrl: '',
-      threads: []
     }
   }
 

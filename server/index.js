@@ -43,10 +43,9 @@ app.post('/businesses', handler.checkBusinessData);
 
 // SMS
 app.post('/messages', handler.textBusinesses);
-app.post('/sms', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
-app.post('/', handler.receiveText); // SHOULD CHANGE ngrok path to '/sms' if there is time.
-app.post('/createNewThread/:groupName', handler.createNewThread);
-// app.post('/sms', handler.receiveText); 
+app.post('/sms', handler.receiveText);
+app.post('/createNewThread/group/:groupName', handler.createNewThread);
+
 app.get('/findText/:number', handler.findResponsesFromContactNumber);
 
 app.post('/call', handler.callBusinesses)  
@@ -58,6 +57,9 @@ app.get('/threads', (req, res) => {
 });
 
 let port = process.env.PORT || 3000;
+
+//Deployment ports
+// app.set('port', (port));
 
 app.listen(port, function() {
   console.log('listening on on port:' + port);
