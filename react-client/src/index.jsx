@@ -7,6 +7,7 @@ import SoundIcon from './components/SoundIcon.jsx'
 import Inputs from './components/Inputs.jsx'
 import List from './components/List.jsx'
 import Threads from './components/Threads.jsx'
+import FileUpload from './components/FileUpload.jsx'
 import {HashRouter, Route, IndexRoute, Link} from 'react-router-dom';
 // import {BrowserRouter, Route,IndexRoute, Link} from 'react-router-dom'
 
@@ -123,7 +124,7 @@ class App extends React.Component {
     return (
     <HashRouter>
       <div>
-        <Nav  fetchBusinesses={this.fetchBusinesses.bind(this)} 
+        <Nav fetchBusinesses={this.fetchBusinesses.bind(this)} 
               handleGroupNameChange={this.handleGroupNameChange.bind(this)} 
               handleLocationChange={this.handleLocationChange.bind(this)} 
               searchParams={this.state} />
@@ -143,6 +144,7 @@ class App extends React.Component {
           )
         }}/>
         <Route path="/threads" component={Threads}/>
+        <Route path="/fileUpload" component={FileUpload}/>
       </div>
     </HashRouter>
     )
