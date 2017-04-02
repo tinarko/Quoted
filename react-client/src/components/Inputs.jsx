@@ -7,6 +7,28 @@ import $ from 'jquery';
 class Inputs extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { 
+      businesses: [],
+      groupName: 'Auto Repair',
+      location: 'San Francisco',
+      sendSMS: false,
+      sendPhone: false,
+      textInput: '',
+      recordingPublicUrl: '',
+    }
+  }
+
+  handleTextInputChange(event) {
+    this.setState({textInput: event.target.value});
+    console.log(this.state.textInput);
+  }
+
+  handleCheckBox(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({[name]: value});
+    console.log('name is: ' + name + '; value is: ' + value);
   }
 
   // handleTextChange(e) {
@@ -51,14 +73,14 @@ class Inputs extends React.Component {
               <td><input  type="checkbox" 
                           name="sendSMS"
                           value={this.props.state.sendSMS}
-                          onClick={this.props.handleCheckBox} /> Send SMS Message </td>
+                          onClick={this.handleCheckBox.bind(this)} /> Send SMS Message </td>
               <td><input  type="checkbox" 
                           name="sendPhone"
                           value={this.props.state.sendPhone}
                           onClick={this.props.handleCheckBox} /> Send Phone Message </td> 
             </tr>                         
           </tbody>
-          <Message handleTextInputChange={this.props.handleTextInputChange}/>         
+          <Message handleTextInputChange={this.handleTextInputChange.bind(this)}/>         
           <SoundIcon recordingPublicUrl={this.props.recordingPublicUrl} />        
           <button onClick={this.props.sendInfo} className="btn btn-primary"> Contact your group </button>
           </div>

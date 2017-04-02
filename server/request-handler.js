@@ -235,11 +235,19 @@ exports.userAddcontacts = function(req, res) {
     contact[1] = phoneNumberFormatter(contact[1], contact[2] || 'US')[0].slice(2);
     return contact;
   });
-  for (let contact of contacts) {
-    contactsdb.addContact(...contact);
-  }
 
-  res.send({ responseText: req.file.path });
+  // contacts looks like [[name, number], [name, number]]
+
+ // REFACTOR...
+ //  for (let contact of contacts) {
+ //    contactsdb.addContact(...contact);
+ //  }
+
+ //  res.send({ responseText: req.file.path });
+
+ // WILL INSTEAD send contacts back to FileUpload component to be stored in state
+   res.json(contacts);
+
 };
 
 

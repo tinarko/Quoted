@@ -34,17 +34,8 @@ class App extends React.Component {
     this.setState({location: event.target.value});
   }
 
-  handleTextInputChange(event) {
-    this.setState({textInput: event.target.value});
-  }
 
-  handleCheckBox(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    this.setState({[name]: value});
-    console.log('name is: ' + name + '; value is: ' + value);
-  }
+
 
   sendInfo() {
     console.log('Trying to send info', this.state.textInput);
@@ -127,8 +118,8 @@ class App extends React.Component {
         <Route exact path="/" component={() => {
           return (
             <div>
-            <Inputs handleTextInputChange = {this.handleTextInputChange.bind(this)}
-                    handleCheckBox = {this.handleCheckBox.bind(this)}
+            <Inputs 
+                    
                     sendInfo = {this.sendInfo.bind(this)}
                     state={this.state} /> 
             <List businesses={this.state.businesses} 

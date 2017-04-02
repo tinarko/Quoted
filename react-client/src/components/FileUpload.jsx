@@ -6,6 +6,10 @@ class FileUpload extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      contacts: []
+    };
+
     // For a full list of possible configurations,
     // please consult http://www.dropzonejs.com/#configuration
     this.djsConfig = {
@@ -16,7 +20,7 @@ class FileUpload extends React.Component {
     this.componentConfig = {
       iconFiletypes: ['.csv'],
       showFiletypeIcon: true,
-      postUrl: '/user/addcontacts'
+      postUrl: '/user/addcontacts',
     };
 
     // If you want to attach multiple callbacks, simply
@@ -26,7 +30,11 @@ class FileUpload extends React.Component {
     // Simple callbacks work too, of course
     this.callback = () => console.log('Hello!');
 
-    this.success = file => console.log('uploaded', file);
+    // should receive object of array of contacts
+    this.success = contacts => {
+      console.log(contacts);
+      this.setState({contacts: contacts});
+    }
 
     this.removedfile = file => console.log('removing...', file);
 
