@@ -45,7 +45,14 @@ class FileUpload extends React.Component {
       success: this.success,
       removedfile: this.removedfile
     };
-    return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />;
+    return (
+      <div>
+        <h4>Please input your group name and upload your contacts</h4>
+        <input/>
+        <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
+        <button>Save group</button>
+      </div>
+      );
   }
 }
 
