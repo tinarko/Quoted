@@ -23,6 +23,7 @@ class Nav extends React.Component {
   	<div>
   		<button><Link to="/">Home</Link></button>
   		<button><Link to="/threads">Past Threads</Link></button>
+  		<button><Link to="/fileUpload">Upload Contacts</Link></button>
   	</div>
 		  <form onSubmit={this.props.fetchBusinesses}>
     		<ul className="nav navbar-nav">
