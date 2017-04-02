@@ -24,9 +24,9 @@ class ListItem extends React.Component {
             <img className="businessYelpRating" src={this.props.business.businessRatingUrl} />
           </div>
           <div className="col-md-9 col-lg-9"> 
-            <div> Name: {this.props.business.businessName}</div>
+            <div> Name: {this.props.business.contactName}</div>
             <div> Address: {this.props.business.businessAddress}</div>
-            <div> Phone: {this.props.business.businessPhone}</div>
+            <div> Phone: {this.props.business.contactPhoneNumber}</div>
           </div>
           <div className="left"> {this.props.business.businessDescription} </div> 
         </div>

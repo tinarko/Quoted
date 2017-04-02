@@ -25,8 +25,8 @@ yelp.queryApi = function(obj) {
           contact.location.address = 'Serving ' + contact.location.city;
         }
         contactsdb.Contacts.create({
-          businessName: contact.name,
-          businessPhone: contact.phone,
+          contactName: contact.name,
+          contactPhoneNumber: contact.phone,
           businessAddress: contact.location.address,
           businessCity: contact.location.city,
           businessPictureUrl: contact.image_url,
