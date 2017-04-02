@@ -43,10 +43,11 @@ exports.checkBusinessData = function(req, res) {
         if(result.length <= 2) {
           yelp.queryApi({ 'term': category, 'location': location })
           .then((results) => {
-            // console.log('yelp query results: ', results);
+            // console.log('results.businesses', results.businesses);
             res.json(results.businesses);
           });
         } else {            
+          // console.log('yelp query results: ', result);
           res.json(result); 
         }
       }
@@ -73,11 +74,10 @@ exports.textBusinesses = function(req, res) {
     } else {
       // console.log('test businesses', businesses);
       businesses.forEach(function(biz) {
-        // console.log('business phone', biz.businessPhone);
         client.messages.create({
-          to: biz.businessPhone,
+          to: biz.contactPhoneNumber,
           from: phoneNumber,
-          body: 'Hey ' + biz.businessName +  '! ' + textInput
+          body: 'Hey ' + biz.contactName +  '! ' + textInput
         }, function (err, message) {
           if (err) {
             console.log('err', err);
