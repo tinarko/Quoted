@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
+// import ManuallyAddContacts from './ManuallyAddContacts.jsx';
+import $ from 'jquery';
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -8,7 +10,9 @@ class FileUpload extends React.Component {
 
     this.state = {
       contacts: [],
-      groupName: ''
+      groupName: '',
+      text: 'Bob',
+      number: 1234567890
     };
 
     // For a full list of possible configurations,
@@ -52,10 +56,45 @@ class FileUpload extends React.Component {
     // console.log(this.state.groupName);
   }
 
-  // save groupname and contacts to db
+  changeText(event) {
+    this.setState({text: event.target.value});
+    // console.log(this.state.text);
+  }
+
+  changeNumber(event) {
+    this.setState({number: event.target.value});
+    // console.log(this.state.number);
+  }
+
+  addContact() {
+    var contacts = this.state.contacts;
+    contacts.push([this.state.text, this.state.number]);
+    console.log(contacts);
+    this.setState({contacts: contacts});
+  }
+
+  // save groupname and contacts to db 
   clickHandler() {
     console.log('clicked');
     console.log(this.state);
+    var groupName = this.state.groupName;
+    var contacts = this.state.contacts;
+    $.ajax({
+      url:'createNewGroup/group/:' + groupName,
+      method: 'POST',
+      data: {
+        contacts: contacts
+      },
+      dataType: 'application/json',
+      success: (data) =>{
+        console.log('successfully returned from server!');
+        console.log(data);
+
+      },
+      fail: (err) => {
+        throw err;
+      }
+    });
   }
 
   render() {
@@ -83,9 +122,14 @@ class FileUpload extends React.Component {
 
     return (
       <div>
-        <h3>Please upload your contacts and give them a group name!</h3>
-        <p>Your CSV file should hold one contact's name and number per line, separated by commas.</p> 
+        <h2>Create Contact Groups</h2>
+        <h4>Please give your contact group a name. Then, upload your contacts OR individually add your contacts before saving!</h4>
+        <h3>Group Name: </h3>
+        <input onChange={this.changeHandler.bind(this)} value={this.state.groupName}/>
+        <br />
         <br/>
+        <h3>Upload Contacts</h3>
+        <p>Your CSV file should hold one contact's name and number per line, separated by commas.</p> 
         <p>Examples of correct ways to input contact information:</p>
         <ul>
           <li>Fork Ly, (111) 222-3333</li>
@@ -94,11 +138,17 @@ class FileUpload extends React.Component {
         </ul>
 
         <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
+        
         <br/>
-        <h4>Group Name: </h4>
-        <input onChange={this.changeHandler.bind(this)} value={this.state.groupName}/>
+        <h3>Individually Add Contact </h3>
+        <div>
+          <input type="text" onChange={this.changeText.bind(this)} value={this.state.text}/>
+          <input type="number" onChange={this.changeNumber.bind(this)} value={this.state.number}/>
+          <button onClick={this.addContact.bind(this)}>Add Contact</button>
+        </div>
         <br/>
-        <h4>Your successfully uploaded contacts: </h4>
+
+        <h3>Your successfully uploaded contacts: </h3>
         <p>Note: Toll-free numbers with area codes 888 and 800 will not be uploaded</p>
         <ul>
           {contactsArray}
@@ -110,4 +160,5 @@ class FileUpload extends React.Component {
   }
 }
 
+        // <ManuallyAddContacts contacts={this.state.contacts}/>
 export default FileUpload;

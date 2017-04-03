@@ -143,9 +143,9 @@ exports.findResponsesFromContactNumber = function(req, res) {
 
 exports.createNewThread = function(req, res) {
   let groupName = req.params.groupName;
-  let outboundMsg = req.params.outboundMsg;
+  // let outboundMsg = req.params.outboundMsg;
   let query = req.query;
-  console.log(outboundMsg);
+  // console.log(outboundMsg);
   console.log(query);
   
   threadsdb.createNewThread(groupName, function(err, data) {
@@ -248,6 +248,19 @@ exports.userAddcontacts = function(req, res) {
    // res.send(JSON.stringify(contacts));
    res.json(contacts);
 
+};
+
+exports.createNewGroup = function(req, res) {
+  let groupName = req.params.groupName.slice(1);
+  var contacts = req.body.contacts;
+  console.log('groupName', groupName);
+  // console.log('contacts', contacts);
+  contacts.forEach(contact => {
+    console.log(contact, groupName);
+    contactsdb.addContact(contact[0], contact[1], [groupName]);
+  });
+
+  res.json('hit server!');
 };
 
 
