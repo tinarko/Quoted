@@ -7,8 +7,9 @@ var Schema = mongoose.Schema;
 var threadsSchema = new Schema({
   outboundMsg: String,
   groupName: String,
-  contacts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contacts'}],
-  responses: Array // of objects: {fromNumber: Number, inboundMsg: String,}
+  contacts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contacts'}], 
+  // contacts: Array, // Currently saved as an array of arrays: [[name, number], [name, number]] 
+  responses: Array // of objects that looks like: {fromNumber: Number, inboundMsg: String,}
 });
 
 var Threads = mongoose.model('Threads', threadsSchema);

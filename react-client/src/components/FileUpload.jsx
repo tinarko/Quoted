@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
+import $ from 'jquery';
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -52,10 +53,28 @@ class FileUpload extends React.Component {
     // console.log(this.state.groupName);
   }
 
-  // save groupname and contacts to db
+  // save groupname and contacts to db 
   clickHandler() {
     console.log('clicked');
     console.log(this.state);
+    var groupName = this.state.groupName;
+    var contacts = this.state.contacts;
+    $.ajax({
+      url:'createNewGroup/group/:' + groupName,
+      method: 'POST',
+      data: {
+        contacts: contacts
+      },
+      dataType: 'application/json',
+      success: (data) =>{
+        console.log('successfully returned from server!');
+        console.log(data);
+
+      },
+      fail: (err) => {
+        throw err;
+      }
+    });
   }
 
   render() {
